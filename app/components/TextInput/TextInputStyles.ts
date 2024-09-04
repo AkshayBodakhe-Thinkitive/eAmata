@@ -30,7 +30,7 @@ export const TextInputStyles = StyleSheet.create({
     },
     inputBox: {
         fontFamily:FontType.Roboto_Medium,
-        color: Colors.neutral20,
+        color: Colors.neutral80,
         fontSize: responsiveFontSize(1.8),
         fontWeight:'500',
         width: '100%',

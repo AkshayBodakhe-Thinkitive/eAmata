@@ -58,7 +58,7 @@ const WelcomeScreen = () => {
       <View style={styles.btnContainer}>
         <Button 
         title="Verify Code" 
-        // disabled={!isValidEmail}
+        disabled={!isValidEmail}
         />
       </View>
     </SafeAreaView>
