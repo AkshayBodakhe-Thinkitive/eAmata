@@ -1,4 +1,4 @@
-import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Image, Platform, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {Colors} from '../../../constants/ColorConstants';
 import {ImagePath} from '../../../constants/ImagePaths';
@@ -11,30 +11,39 @@ import TextInput from '../../../components/TextInput/TextInput';
 import {FontType} from '../../../constants/FontType';
 import MaterialCommunityIcons from '../../../components/Icons/MaterialCommunityIcons';
 import Button from '../../../components/ButtonComponent/ButtonComponent';
+import { AuthNavConstants } from '../../../constants/NavConstants';
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({navigation}:any) => {
   const [email, setEmail] = useState('');
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [errorText, setErrorText] = useState('');
 
-  const [isValidEmail, setIsValidEmail] = useState(false);
-
-  const validateEmail = (email:string) => {
-    // Simple email validation regex
+  const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  const handleEmailChange = (value:string) => {
+  const handleEmailChange = (value: string) => {
     setEmail(value);
-    setIsValidEmail(validateEmail(value));
+    setIsValidEmail(true); 
+    setErrorText(''); 
   };
 
+  const handleSubmit = () => {
+    navigation.navigate(AuthNavConstants.verifycode,{email:email})
+    // if (validateEmail(email)) {
+    //   // Proceed with the next steps
+    //   console.log('Email is valid');
+    // } else {
+    //   setIsValidEmail(false);
+    //   setErrorText('Please enter a valid email address.');
+    // }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.page}>
-        <View>
           <Image source={ImagePath.eAMataBlueText} style={styles.logoImage} />
-        </View>
         <View>
           <Text style={styles.welCome}>Welcome!</Text>
           <Text style={styles.verify}>
@@ -44,6 +53,7 @@ const WelcomeScreen = () => {
         <TextInput
           value={email}
           placeholder="Enter Your Email"
+          autoCapitalize='none'
           label="Email"
           leftIcon={
             <MaterialCommunityIcons
@@ -53,13 +63,12 @@ const WelcomeScreen = () => {
             />
           }
           onChangeText={handleEmailChange}
+          isValid={!isValidEmail}
+          errorText={errorText}
         />
       </View>
       <View style={styles.btnContainer}>
-        <Button 
-        title="Verify Code" 
-        disabled={!isValidEmail}
-        />
+        <Button title="Verify Code" disabled={email === ''} onPress={handleSubmit}/>
       </View>
     </SafeAreaView>
   );
@@ -75,6 +84,7 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     padding: '4%',
+    marginTop : Platform.OS == 'android' ? '8%' :  null
   },
   logoImage: {
     resizeMode: 'contain',
@@ -90,7 +100,6 @@ const styles = StyleSheet.create({
   },
   verify: {
     fontSize: responsiveFontSize(1.9),
-    fontWeight: '400',
     color: Colors.neutral80,
     fontFamily: FontType.Roboto_Regular,
     marginBottom: responsiveHeight(2.5),

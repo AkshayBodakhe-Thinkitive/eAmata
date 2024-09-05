@@ -38,12 +38,21 @@ const TextInput = forwardRef(
     ref: any,
   ) => {
     const [showPass, setShowPass] = useState(true);
-    const [text, setText] = useState('');
+
+    const [internalValue, setInternalValue] = useState(value || '');
+
 
     const onChangeTxt = (val: string) => {
+      setInternalValue(val);
       onChangeText && onChangeText(val);
-      setText(val);
+
     };
+
+    const displayValue = secureTextEntry && showPass
+    ? '*'.repeat(internalValue.length)
+    : internalValue;
+
+
     return (
       <View style={[styles.container, style]}>
         {label && <Text style={styles.labelStyles}>{label}</Text>}
@@ -66,11 +75,11 @@ const TextInput = forwardRef(
               leftIcon ? {marginLeft: responsiveWidth(8)} : null,
             ]}
             editable={editable}
-            value={value}
+            value={showPass && secureTextEntry ? displayValue : internalValue}
             placeholder={placeholder}
             placeholderTextColor={Colors.neutral40}
             onChangeText={onChangeTxt}
-            secureTextEntry={secureTextEntry ? showPass : false}
+            // secureTextEntry={secureTextEntry ? showPass : false}
             keyboardType={keyboardType}
             onBlur={onBlur}
             onFocus={onFocus}
@@ -86,15 +95,17 @@ const TextInput = forwardRef(
         {isValid && errorText && (
           <Text style={styles.errorText}>{errorText}</Text>
         )}
-        {secureTextEntry === true && text.length > 0 && (
+        {secureTextEntry === true 
+        // && text.length > 0 
+        && (
           <TouchableOpacity
             onPress={() => {
               setShowPass(!showPass);
             }}
             style={styles.eye}>
             <Ionicons
-              name={showPass ? 'eye-off' : 'eye'}
-              color={'#0097F0'}
+              name={showPass ? 'eye-outline' : 'eye-outline'}
+              color={Colors.neutral70}
               size={24}
             />
           </TouchableOpacity>

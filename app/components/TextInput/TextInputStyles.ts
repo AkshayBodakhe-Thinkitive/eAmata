@@ -42,6 +42,7 @@ export const TextInputStyles = StyleSheet.create({
         right: 15,
         padding: 5,
         paddingLeft: 10,
+        top : '45%',
     },
     icon: {
         position: 'absolute',
