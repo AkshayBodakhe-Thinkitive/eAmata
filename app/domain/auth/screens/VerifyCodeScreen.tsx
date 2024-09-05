@@ -5,14 +5,13 @@ import {ImagePath} from '../../../constants/ImagePaths';
 import {
   responsiveFontSize,
   responsiveHeight,
-  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useRoute} from '@react-navigation/native';
 import {FontType} from '../../../constants/FontType';
 import CustomText from '../../../components/Text/CustomText';
 import CustomOTPInput from '../../../components/OTPInput/CustomOtpInput';
-import Button from '../../../components/ButtonComponent/ButtonComponent';
 import { AuthNavConstants } from '../../../constants/NavConstants';
+import BottomButton from '../components/BottomButton/BottomButton';
 
 const VerifyCodeScreen = ({navigation}:any) => {
   const route = useRoute<any>();
@@ -36,9 +35,7 @@ const VerifyCodeScreen = ({navigation}:any) => {
         <CustomText>{email}</CustomText>
         <CustomOTPInput onChange={otp => setOtp(otp)}></CustomOTPInput>
       </View>
-      <View style={styles.btnContainer}>
-        <Button title="Submit Code" onPress={handleSubmit}/>
-      </View>
+      <BottomButton title="Submit Code" onPress={handleSubmit} />
     </SafeAreaView>
   );
 };
@@ -66,17 +63,5 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(3),
     color: Colors.neutral80,
     marginBottom: 5,
-  },
-  btnContainer: {
-    padding: '2%',
-    borderTopWidth: 0.5,
-    borderColor: 'lightgrey',
-    elevation: 5,
-    shadowOffset: {
-      height: -5,
-      width: 0,
-    },
-    shadowOpacity: 0.06,
-    backgroundColor: Colors.white,
   },
 });

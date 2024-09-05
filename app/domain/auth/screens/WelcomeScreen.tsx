@@ -10,8 +10,8 @@ import {
 import TextInput from '../../../components/TextInput/TextInput';
 import {FontType} from '../../../constants/FontType';
 import MaterialCommunityIcons from '../../../components/Icons/MaterialCommunityIcons';
-import Button from '../../../components/ButtonComponent/ButtonComponent';
 import { AuthNavConstants } from '../../../constants/NavConstants';
+import BottomButton from '../components/BottomButton/BottomButton';
 
 const WelcomeScreen = ({navigation}:any) => {
   const [email, setEmail] = useState('');
@@ -67,9 +67,7 @@ const WelcomeScreen = ({navigation}:any) => {
           errorText={errorText}
         />
       </View>
-      <View style={styles.btnContainer}>
-        <Button title="Verify Code" disabled={email === ''} onPress={handleSubmit}/>
-      </View>
+      <BottomButton disabled={email === ''} title="Verify Code" onPress={handleSubmit} />
     </SafeAreaView>
   );
 };
@@ -103,17 +101,5 @@ const styles = StyleSheet.create({
     color: Colors.neutral80,
     fontFamily: FontType.Roboto_Regular,
     marginBottom: responsiveHeight(2.5),
-  },
-  btnContainer: {
-    padding: '2%',
-    borderTopWidth: 0.5,
-    borderColor: 'lightgrey',
-    elevation: 5,
-    shadowOffset: {
-      height: -5,
-      width: 0,
-    },
-    shadowOpacity: 0.06,
-    backgroundColor: Colors.white,
   },
 });

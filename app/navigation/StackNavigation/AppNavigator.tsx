@@ -4,6 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from '../../domain/auth/screens/SplashScreen';
 import AuthNavigator from './AuthNavigator';
+import { AppNavConstants } from '../../constants/NavConstants';
+import DrawerNavigator from '../DrawerNavigation/DrawerNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,10 +13,11 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="SplashScreen"
+        initialRouteName={AppNavConstants.SPLASHSCREEN}
         screenOptions={{headerShown: false}}>
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="Auth" component={AuthNavigator} />
+        <Stack.Screen name={AppNavConstants.SPLASHSCREEN} component={SplashScreen} />
+        <Stack.Screen name={AppNavConstants.AUTH} component={AuthNavigator} />
+        <Stack.Screen name={AppNavConstants.MAIN} component={DrawerNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
