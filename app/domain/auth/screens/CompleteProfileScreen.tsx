@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import {Colors} from '../../../constants/ColorConstants';
 import {FontType} from '../../../constants/FontType';
 import {
@@ -19,6 +19,7 @@ import Row from '../../../components/Row/Row';
 import Header from '../../../components/Header/Header';
 import BottomButton from '../components/BottomButton/BottomButton';
 import { AuthNavConstants } from '../../../constants/NavConstants';
+import SignaturePad from '../../../components/SignaturePad/SignaturePad';
 
 const CompleteProfileScreen = ({navigation}:any) => {
   const genderData = [
@@ -34,6 +35,8 @@ const CompleteProfileScreen = ({navigation}:any) => {
   const handleSubmit = () => {
     navigation.navigate(AuthNavConstants.consentformslist);
   };
+
+  const [isDrawing, setIsDrawing] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -127,16 +130,7 @@ const CompleteProfileScreen = ({navigation}:any) => {
           placeholder="Enter Phone Number"
           style={styles.textInputStyles}
         />
-        <CustomText
-          fontFamily={FontType.Roboto_Medium}
-          fontSize={responsiveFontSize(2)}>
-          Signature
-        </CustomText>
-        <TextInput
-          label="Sign"
-          placeholder="Enter Sign"
-          style={styles.textInputStyles}
-        />
+        <SignaturePad setIsDrawing={setIsDrawing} onOK={() => {}} />
 
         <View style={{marginBottom: 50}}></View>
       </ScrollView>

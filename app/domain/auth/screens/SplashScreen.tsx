@@ -1,10 +1,13 @@
-import { Image, StyleSheet, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { ImagePath } from '../../../constants/ImagePaths';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import {Image, ImageBackground, StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {ImagePath} from '../../../constants/ImagePaths';
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 import Loader from '../../../components/Loader/Loader';
 
-const SplashScreen = ({ navigation }: any) => {
+const SplashScreen = ({navigation}: any) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -23,12 +26,15 @@ const SplashScreen = ({ navigation }: any) => {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <Image source={ImagePath.splashscreenlogo} style={styles.logoStyles} />
-        {loading && <Loader />} 
-      </View>
-    </View>
+      <ImageBackground source={ImagePath.splashscreen} style={{flex:1,alignItems:'center'}}>
+        <View style={styles.innerContainer}>
+          <Image
+            source={ImagePath.splashscreenlogo}
+            style={styles.logoStyles}
+          />
+          {loading && <Loader />}
+        </View>
+      </ImageBackground>
   );
 };
 
@@ -37,7 +43,7 @@ export default SplashScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(2, 146, 192, 1)',
+    // backgroundColor: 'rgba(2, 146, 192, 1)',
     alignItems: 'center',
   },
   innerContainer: {

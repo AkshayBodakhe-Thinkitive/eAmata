@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   text: {
      fontSize : responsiveFontSize(2),
       color: Colors.primary,
-      fontFamily: FontType.Roboto_Regular,
+      fontFamily: FontType.Roboto_Medium,
       padding : 5
   },
 });

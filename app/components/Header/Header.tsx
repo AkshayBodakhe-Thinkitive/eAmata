@@ -2,9 +2,11 @@ import {
   Platform,
   SafeAreaView,
   StatusBar,
+  StyleProp,
   StyleSheet,
   Text,
   TouchableOpacity,
+  ViewStyle,
 } from 'react-native';
 import React, {ReactNode} from 'react';
 import {Colors} from '../../constants/ColorConstants';
@@ -15,6 +17,7 @@ import {
 import {FontType} from '../../constants/FontType';
 import {Ionicons} from '../Icons/Ionicons';
 import Row from '../Row/Row';
+import {useNavigation} from '@react-navigation/native';
 
 const Header = ({
   title,
@@ -22,9 +25,14 @@ const Header = ({
   iconVisible = true,
   onIconPress,
   children,
+  style,
 }: Props) => {
+  const navigation = useNavigation<any>();
+
+  const navigateBack = () => navigation.goBack();
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, style]}>
       {children ? (
         children
       ) : (
@@ -36,11 +44,13 @@ const Header = ({
               {icon ? (
                 icon
               ) : (
-                <Ionicons
-                  name="arrow-back-sharp"
-                  color={Colors.neutral90}
-                  style={styles.icon}
-                />
+                <TouchableOpacity onPress={navigateBack}>
+                  <Ionicons
+                    name="arrow-back-sharp"
+                    color={Colors.neutral90}
+                    style={styles.icon}
+                  />
+                </TouchableOpacity>
               )}
             </TouchableOpacity>
           )}
@@ -59,6 +69,7 @@ interface Props {
   iconVisible?: boolean;
   onIconPress?: () => void;
   children?: ReactNode;
+  style?: StyleProp<ViewStyle>;
 }
 
 const styles = StyleSheet.create({
@@ -68,14 +79,13 @@ const styles = StyleSheet.create({
     flex: Platform.OS === 'android' ? 0.13 : 0.075,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: '4%',
   },
   headerTxt: {
     fontFamily: FontType.Roboto_Medium,
     fontSize: responsiveFontSize(2.8),
     color: Colors.neutral90,
     flex: 1,
-    marginLeft:'3%'
+    marginLeft: '3%',
   },
   iconContainer: {
     marginRight: '2%',

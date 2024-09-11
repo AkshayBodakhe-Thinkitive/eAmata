@@ -1,11 +1,12 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useRef, useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
+import React, {useRef} from 'react';
 import SignatureScreen from 'react-native-signature-canvas';
-import {EntypoIcons} from '../Icons/EntypoIcons';
-import {responsiveFontSize} from 'react-native-responsive-dimensions';
-import { MaterialIcons } from '../Icons/MaterialIcons';
-import { FontType } from '../../constants/FontType';
-import { Colors } from '../../constants/ColorConstants';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+} from 'react-native-responsive-dimensions';
+import {FontType} from '../../constants/FontType';
+import {Colors} from '../../constants/ColorConstants';
 
 const SignaturePad = ({setIsDrawing, onOK, dataUrl}: SignaturePadProps) => {
   const ref = useRef<any>();
@@ -66,7 +67,7 @@ const SignaturePad = ({setIsDrawing, onOK, dataUrl}: SignaturePadProps) => {
         bottom: 0px;
        
         border:1px solid #D2D2D2;
-       
+       background-color : #CDD7DA;
         border-radius : 8px;
       }
 `;
@@ -76,13 +77,14 @@ const SignaturePad = ({setIsDrawing, onOK, dataUrl}: SignaturePadProps) => {
       <Text
         style={{
           fontFamily: FontType.Roboto_Medium,
-          fontSize: 12,
+          fontSize: responsiveFontSize(2),
           marginBottom: 10,
           color: Colors.neutral80,
         }}>
-        Digital Signature
+        Signature
       </Text>
-      <View style={{height: 120, width: 300, marginBottom: 10}}>
+      <View
+        style={{height: responsiveHeight(20), width: '100%', marginBottom: 10}}>
         <SignatureScreen
           ref={ref}
           dataURL={dataUrl}
@@ -95,28 +97,26 @@ const SignaturePad = ({setIsDrawing, onOK, dataUrl}: SignaturePadProps) => {
           onGetData={handleData}
           descriptionText={' '}
         />
-        <TouchableOpacity
-          onPress={handleClear}
+        <View
           style={{
             position: 'absolute',
-            right: 0,
-            bottom:0,
-            margin: 6,
-            borderRadius: 15,
-            padding:3,
-            backgroundColor: Colors.neutral20,
+            bottom: 0,
+            padding: 3,
+            borderWidth: 1,
+            width: '100%',
+            height: responsiveHeight(5),
+            borderBottomLeftRadius: 8,
+            borderBottomRightRadius: 8,
+            borderColor: Colors.neutral20,
+            justifyContent:'center',
+            backgroundColor:"white"
           }}>
-          {/* <MaterialIcons
-            name="undo"
-            size={responsiveFontSize(1.5)}
-            color={colors.grey80}
-          /> */}
-           <EntypoIcons
-            name="cross"
-            size={responsiveFontSize(1.5)}
-            color={Colors.neutral70}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleClear}
+            style={{alignItems: 'center', justifyContent: 'center',height:'100%'}}>
+            <Text style={{fontFamily:FontType.Roboto_Regular,fontSize:responsiveFontSize(2)}}>Remove</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

@@ -4,6 +4,8 @@ export const Colors = {
     white : 'white',
 
     primary : '#006D8F',
+    primary5 : '#DCF7FF',
+    primary70 : '#023F53',
     primary80 : '#032F3D',
 
     neutral1 : '#F2F7F9',
@@ -19,5 +21,6 @@ export const Colors = {
 
     positive60 : '#049B22',
 
-    negative50 : '#CE0718'
+    negative50 : '#CE0718',
+    negative60 : '#B1000F'
 }
