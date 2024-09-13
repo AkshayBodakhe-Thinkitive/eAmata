@@ -12,4 +12,10 @@ export const ImagePath = {
     event : require('../assets/images/event.png'),
     event_focused : require('../assets/images/event_focused.png'),  
     avatar : require('../assets/images/Avatar.png'),  
+    browse_activity : require('../assets/images/browse_activity.png'), 
+    clinical_notes : require('../assets/images/clinical_notes.png'),  
+    handshake : require('../assets/images/handshake.png'),    
+    allergies : require('../assets/images/allergies.png'),    
+    medication_liquid : require('../assets/images/medication_liquid.png'),    
+    
 }

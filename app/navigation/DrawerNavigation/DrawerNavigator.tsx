@@ -1,68 +1,148 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {
   DrawerContentScrollView,
   createDrawerNavigator,
 } from '@react-navigation/drawer';
-import {Ionicons} from '../../components/Icons/Ionicons';
 import MaterialCommunityIcons from '../../components/Icons/MaterialCommunityIcons';
 import {MaterialIcons} from '../../components/Icons/MaterialIcons';
-import {AppNavConstants, BottomNavConstants} from '../../constants/NavConstants';
-import { useNavigation } from '@react-navigation/native';
-import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 import CustomDrawerItem from './CustomDrawerItem';
 import BottomBar from '../BottomNavigation/BottomBar';
-import { Colors } from '../../constants/ColorConstants';
+import {Colors} from '../../constants/ColorConstants';
+import {ImagePath} from '../../constants/ImagePaths';
+import Row from '../../components/Row/Row';
+import {FeatherIcon} from '../../components/Icons/FeatherIcon';
 
 const Drawer = createDrawerNavigator();
+
+const ImageIcon = ({imagePath}: any) => {
+  return (
+    <Image
+      source={imagePath}
+      style={{
+        resizeMode: 'contain',
+        height: responsiveFontSize(3),
+        width: responsiveWidth(5.5),
+      }}
+    />
+  );
+};
 
 const DrawerNavigator = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  const navigation = useNavigation<any>()
+  const drawerItems: any = [
+    {
+      label: 'Care Plan',
+      icon : <ImageIcon imagePath={ImagePath.clinical_notes}/>,
+      onPress: () => navigation.navigate('HomeScreen'),
+    },
+    {
+      label: 'Clinical',
+      icon: (
+        <MaterialCommunityIcons
+          name="home-plus-outline"
+          size={21}
+          color={Colors.primary80}
+        />
+      ),
+      subItems: [
+        {
+          label: 'Allergies',
+          icon : <ImageIcon imagePath={ImagePath.allergies}/>,
+          onPress: () => navigation.navigate('AllergiesScreen'),
+        },
+        {
+          label: 'Medications',
+          icon : <ImageIcon imagePath={ImagePath.medication_liquid}/>,
+          onPress: () => navigation.navigate('MedicationsScreen'),
+        },
+      ],
+    },
+    {
+      label: 'Assigned Devices',
+      icon : <ImageIcon imagePath={ImagePath.browse_activity}/>,
+      onPress: () => navigation.navigate('HomeScreen'),
+    },
+    {
+      label: 'Consents',
+      icon : <ImageIcon imagePath={ImagePath.handshake}/>,
+      onPress: () => navigation.navigate('HomeScreen'),
+    },
+    {
+      label: 'Resources',
+      icon: (
+        <MaterialCommunityIcons
+          name="text-box-outline"
+          size={21}
+          color={Colors.primary80}
+        />
+      ),
+      onPress: () => navigation.navigate('HomeScreen'),
+    },
+  ];
+
+  const navigation = useNavigation<any>();
 
   const logoutFun = () => {
-    // Handle logout functionality
-    navigation.navigate('Auth')
+    navigation.navigate('Auth');
     setShowLogoutModal(false);
   };
 
+  const closeDrawer = () => {
+    navigation.dispatch(DrawerActions.closeDrawer());
+  };
 
   const CustomDrawerContent = (props: any) => {
-    const drawerItems : any = [
-      {
-        label: 'Home',
-        icon: (
-          <MaterialCommunityIcons
-            name={'home-outline'}
-            size={21}
-            color={Colors.primary80}
-          />
-        ),
-        onPress: () => props.navigation.navigate(BottomNavConstants.HOME),
-      }
-    ];
-
     return (
       <DrawerContentScrollView {...props} style={{height: 100}}>
-         <View>
+        <Row
+          style={{
+            justifyContent: 'space-between',
+            width: '90%',
+            marginHorizontal: responsiveWidth(4),
+            marginBottom: 15,
+          }}>
+          <Image
+            source={ImagePath.eAMataBlueText}
+            style={{
+              width: '50%',
+              height: responsiveHeight(3.2),
+              resizeMode: 'contain',
+            }}
+          />
+          <TouchableOpacity onPress={closeDrawer}>
+            <FeatherIcon name="x" size={responsiveFontSize(3.5)} />
+          </TouchableOpacity>
+        </Row>
 
-          <View style={styles.drawerItemContainer} />
-        </View>
-
-        {drawerItems.map((item:any, index:any) => (
+        {drawerItems.map((item: any, index: any) => (
           <CustomDrawerItem
             key={index}
             label={item.label}
             icon={item.icon}
             onPress={item.onPress}
+            subItems={item.subItems}
           />
         ))}
+
         <View style={styles.drawerItemContainer} />
         <View>
           <CustomDrawerItem
             label="Log Out"
-            icon={<MaterialIcons name={'logout'} size={21} color={Colors.negative50} />}
+            icon={
+              <MaterialIcons
+                name={'logout'}
+                size={21}
+                color={Colors.negative50}
+              />
+            }
             onPress={() => setShowLogoutModal(!showLogoutModal)}
           />
           {/* <LogoutModal
@@ -83,13 +163,6 @@ const DrawerNavigator = () => {
         name="HomeSc"
         component={BottomBar}
         options={{
-          drawerIcon: ({focused, size}) => (
-            <MaterialCommunityIcons
-              name="home-outline"
-              size={size}
-              color={focused ? '#7cc' : '#ccc'}
-            />
-          ),
           unmountOnBlur: true,
           headerShown: false,
         }}
@@ -104,22 +177,18 @@ const styles = StyleSheet.create({
   drawerItemContainer: {
     width: '100%',
     height: 0.5,
-    // backgroundColor: colors.grey66,
   },
   drawerItemWrapper: {
     padding: 8,
     alignItems: 'center',
     flexDirection: 'row',
+    marginLeft: 20,
   },
   drawerItemTextWrapper: {
     paddingLeft: 15,
     fontWeight: 'bold',
-    // color: colors.black,
   },
-  drawerItemSubText: {
-    color: '#0097F0',
-    paddingLeft: 15,
-    paddingTop: 5,
-    fontWeight: 'bold',
+  subItemContainer: {
+    paddingLeft: 35,
   },
 });

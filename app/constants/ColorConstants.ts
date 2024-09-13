@@ -8,6 +8,8 @@ export const Colors = {
     primary70 : '#023F53',
     primary80 : '#032F3D',
 
+    informative10 : '#BDDAFF',
+
     neutral1 : '#F2F7F9',
     neutral5 : '#E8EBEC',
     neutral10 : '#CDD7DA',
