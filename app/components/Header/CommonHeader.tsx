@@ -1,8 +1,14 @@
-import {Image, Platform, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import Header from './Header';
 import Row from '../Row/Row';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Ionicons} from '../Icons/Ionicons';
 import {MaterialIcons} from '../Icons/MaterialIcons';
 import {
@@ -95,10 +101,10 @@ const styles = StyleSheet.create({
     fontFamily: FontType.Roboto_Medium,
     marginBottom: 2,
   },
-  titleTxt : {
+  titleTxt: {
     color: Colors.neutral90,
     fontFamily: FontType.Roboto_Medium,
-    fontSize : responsiveFontSize(2.6)
+    fontSize: responsiveFontSize(2.6),
   },
   nameTxt: {
     color: Colors.neutral90,

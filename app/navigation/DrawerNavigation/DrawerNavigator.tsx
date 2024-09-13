@@ -18,6 +18,7 @@ import {Colors} from '../../constants/ColorConstants';
 import {ImagePath} from '../../constants/ImagePaths';
 import Row from '../../components/Row/Row';
 import {FeatherIcon} from '../../components/Icons/FeatherIcon';
+import { AppNavConstants } from '../../constants/NavConstants';
 
 const Drawer = createDrawerNavigator();
 
@@ -41,7 +42,7 @@ const DrawerNavigator = () => {
     {
       label: 'Care Plan',
       icon : <ImageIcon imagePath={ImagePath.clinical_notes}/>,
-      onPress: () => navigation.navigate('HomeScreen'),
+      onPress: () => navigation.navigate(AppNavConstants.CARE_PLAN),
     },
     {
       label: 'Clinical',
@@ -56,24 +57,24 @@ const DrawerNavigator = () => {
         {
           label: 'Allergies',
           icon : <ImageIcon imagePath={ImagePath.allergies}/>,
-          onPress: () => navigation.navigate('AllergiesScreen'),
+          onPress: () => navigation.navigate(AppNavConstants.ALLERGIES),
         },
         {
           label: 'Medications',
           icon : <ImageIcon imagePath={ImagePath.medication_liquid}/>,
-          onPress: () => navigation.navigate('MedicationsScreen'),
+          onPress: () => navigation.navigate(AppNavConstants.MEDICATIONS),
         },
       ],
     },
     {
       label: 'Assigned Devices',
       icon : <ImageIcon imagePath={ImagePath.browse_activity}/>,
-      onPress: () => navigation.navigate('HomeScreen'),
+      onPress: () => navigation.navigate(AppNavConstants.ASSIGNED_DEVICES),
     },
     {
       label: 'Consents',
       icon : <ImageIcon imagePath={ImagePath.handshake}/>,
-      onPress: () => navigation.navigate('HomeScreen'),
+      onPress: () => navigation.navigate(AppNavConstants.CONSENTS),
     },
     {
       label: 'Resources',
@@ -84,7 +85,7 @@ const DrawerNavigator = () => {
           color={Colors.primary80}
         />
       ),
-      onPress: () => navigation.navigate('HomeScreen'),
+      onPress: () => navigation.navigate(AppNavConstants.RESOURCES),
     },
   ];
 

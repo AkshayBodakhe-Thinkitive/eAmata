@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const UpcomingEvents = () => {
+const AllergiesScreen = () => {
   return (
     <View>
+      <Text>AllergiesScreen</Text>
     </View>
   )
 }
 
-export default UpcomingEvents
+export default AllergiesScreen
 
 const styles = StyleSheet.create({})

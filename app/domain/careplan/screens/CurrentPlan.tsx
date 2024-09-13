@@ -1,13 +1,15 @@
+
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const UpcomingEvents = () => {
+const CurrentPlan = () => {
   return (
     <View>
+      {/* <Text>CurrentPlan</Text> */}
     </View>
   )
 }
 
-export default UpcomingEvents
+export default CurrentPlan
 
 const styles = StyleSheet.create({})

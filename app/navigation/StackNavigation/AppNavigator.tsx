@@ -6,6 +6,11 @@ import SplashScreen from '../../domain/auth/screens/SplashScreen';
 import AuthNavigator from './AuthNavigator';
 import { AppNavConstants } from '../../constants/NavConstants';
 import DrawerNavigator from '../DrawerNavigation/DrawerNavigator';
+import CarePlanMain from '../../domain/careplan/screens/CarePlanMain';
+import AllergiesScreen from '../../domain/medical-records/screens/AllergiesScreen';
+import AssignedDevices from '../../domain/medical-records/screens/AssignedDevices';
+import ConsentsScreen from '../../domain/medical-records/screens/ConsentsScreen';
+import Resources from '../../domain/medical-records/screens/Resources';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,11 +18,17 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={AppNavConstants.MAIN}
+        initialRouteName={AppNavConstants.SPLASHSCREEN}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name={AppNavConstants.SPLASHSCREEN} component={SplashScreen} />
         <Stack.Screen name={AppNavConstants.AUTH} component={AuthNavigator} />
         <Stack.Screen name={AppNavConstants.MAIN} component={DrawerNavigator} />
+        <Stack.Screen name={AppNavConstants.CARE_PLAN} component={CarePlanMain} />
+        <Stack.Screen name={AppNavConstants.ALLERGIES} component={AllergiesScreen} />
+        <Stack.Screen name={AppNavConstants.MEDICATIONS} component={AllergiesScreen} />
+        <Stack.Screen name={AppNavConstants.ASSIGNED_DEVICES} component={AssignedDevices} />
+        <Stack.Screen name={AppNavConstants.CONSENTS} component={ConsentsScreen} />
+        <Stack.Screen name={AppNavConstants.RESOURCES} component={Resources} />
       </Stack.Navigator>
     </NavigationContainer>
   );

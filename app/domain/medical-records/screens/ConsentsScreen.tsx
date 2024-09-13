@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const UpcomingEvents = () => {
+const ConsentsScreen = () => {
   return (
     <View>
+      <Text>ConsentsScreen</Text>
     </View>
   )
 }
 
-export default UpcomingEvents
+export default ConsentsScreen
 
 const styles = StyleSheet.create({})

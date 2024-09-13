@@ -12,7 +12,14 @@ export const AuthNavConstants = {
 export const AppNavConstants = {
   SPLASHSCREEN : 'splashscreen',
   AUTH : 'Auth',
-  MAIN : 'Main'
+  MAIN : 'Main',
+
+  CARE_PLAN : 'careplan',
+  ALLERGIES : 'allergies',
+  MEDICATIONS : 'medications',
+  ASSIGNED_DEVICES : 'assigneddevices',
+  CONSENTS : 'consents',
+  RESOURCES : 'resources'
 }
 
 export const BottomNavConstants = {

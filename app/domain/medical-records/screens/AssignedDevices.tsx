@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const UpcomingEvents = () => {
+const AssignedDevices = () => {
   return (
     <View>
+      <Text>AssignedDevices</Text>
     </View>
   )
 }
 
-export default UpcomingEvents
+export default AssignedDevices
 
 const styles = StyleSheet.create({})
