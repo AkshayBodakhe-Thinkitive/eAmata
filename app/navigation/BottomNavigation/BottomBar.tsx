@@ -12,6 +12,7 @@ import {OctiIcons} from '../../components/Icons/OctiIcons';
 import HomeScreen from '../../domain/home/screen/HomeScreen';
 import EventsScreen from '../../domain/events/screens/EventsScreen';
 import VitalsScreen from '../../domain/vitals/screens/VitalsScreen';
+import DrawerNavigator from '../DrawerNavigation/DrawerNavigator';
 
 const ChatbotScreen = () => {
   return (
@@ -20,7 +21,6 @@ const ChatbotScreen = () => {
     </View>
   );
 };
-
 
 const PlusButton = ({onPress}: any) => {
   return (
@@ -67,17 +67,23 @@ const BottomBar = () => {
           fontSize: responsiveFontSize(1.5),
         },
         tabBarStyle: {height: responsiveHeight(7)},
-        headerShown :  false
+        headerShown: false,
       })}
       tabBar={props => <CustomTabBar {...props} />}>
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen
+        name="Home"
+        component={DrawerNavigator}
+        options={{
+          unmountOnBlur: true,
+        }}
+      />
       <Tab.Screen name="Events" component={EventsScreen} />
 
       <Tab.Screen
         name="Plus"
-        component={HomeScreen} 
+        component={HomeScreen}
         options={{
-          tabBarButton: props => <PlusButton {...props} />, 
+          tabBarButton: props => <PlusButton {...props} />,
         }}
       />
 
@@ -86,7 +92,6 @@ const BottomBar = () => {
     </Tab.Navigator>
   );
 };
-
 
 const CustomTabBar = (props: any) => {
   return (
@@ -114,7 +119,7 @@ const CustomTabBar = (props: any) => {
                 fontFamily: FontType.Roboto_Medium,
                 fontSize: responsiveFontSize(1.5),
               }}>
-              {route.name !== "Plus" && route.name}
+              {route.name !== 'Plus' && route.name}
             </Text>
           </TouchableOpacity>
         );
@@ -133,26 +138,26 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 20,
     position: 'relative',
-    shadowOpacity:0.1
+    shadowOpacity: 0.1,
   },
   tabButton: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    top : '-2%'
+    top: '-2%',
   },
   plusButton: {
     position: 'absolute',
-    bottom: responsiveHeight(3.1), 
+    bottom: responsiveHeight(3.1),
     left: '55%',
-    transform: [{translateX: -35}], 
+    transform: [{translateX: -35}],
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 10,
-    // borderWidth : 1, 
-    borderRadius : responsiveFontSize(5),
-    padding : 5,
-    backgroundColor : Colors.primary5
+    // borderWidth : 1,
+    borderRadius: responsiveFontSize(5),
+    padding: 5,
+    backgroundColor: Colors.primary5,
   },
   plusButtonInner: {
     width: 60,

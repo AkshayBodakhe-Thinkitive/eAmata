@@ -17,5 +17,8 @@ export const ImagePath = {
     handshake : require('../assets/images/handshake.png'),    
     allergies : require('../assets/images/allergies.png'),    
     medication_liquid : require('../assets/images/medication_liquid.png'),    
-    
+    cardiology : require('../assets/images/cardiology.png'),    
+    glucose : require('../assets/images/glucose.png'),    
+    water_drop : require('../assets/images/water_drop.png'),    
+    weight : require('../assets/images/weight.png'),    
 }

@@ -9,6 +9,7 @@ export const Colors = {
     primary80 : '#032F3D',
 
     informative10 : '#BDDAFF',
+    informative60 : '#004AB1',
 
     neutral1 : '#F2F7F9',
     neutral5 : '#E8EBEC',
@@ -21,8 +22,13 @@ export const Colors = {
     neutral80 : '#212D30',
     neutral90 : '#1C2427',
 
+    positive5 : '#E1FCDE',
     positive60 : '#049B22',
 
+    negative1 : '#FFF2F3',
     negative50 : '#CE0718',
-    negative60 : '#B1000F'
+    negative60 : '#B1000F',
+
+    warning5 : '#FFF2D2',
+    warning70 : '#943C00'
 }

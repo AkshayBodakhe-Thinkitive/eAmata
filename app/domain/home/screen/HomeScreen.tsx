@@ -36,8 +36,9 @@ const HomeScreen = ({navigation}: any) => {
           </Row>
           <FlatList
             data={staticVitalsData}
-            showsHorizontalScrollIndicator={false}
-            horizontal={true}
+            numColumns={2}
+            scrollEnabled={false}
+            columnWrapperStyle={{justifyContent:"space-between",marginBottom:8}}
             contentContainerStyle={{marginBottom: responsiveHeight(1.2)}}
             renderItem={({item}) => {
               return <VitalCard item={item} />;

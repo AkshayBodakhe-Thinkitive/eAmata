@@ -9,32 +9,48 @@ import Row from '../../../components/Row/Row';
 import CustomText from '../../../components/Text/CustomText';
 import {FontType} from '../../../constants/FontType';
 import {Colors} from '../../../constants/ColorConstants';
+import useVitalIcon from './VitalIcons';
+import moment from 'moment';
 
 const VitalCard = ({item}: any) => {
+  const icon = useVitalIcon(item?.name);
+
+  const formatDate = (dateString: any) => {
+    return moment(dateString).format('DD MMM, hh:mm A');
+  };
+
   return (
     <Card style={styles.vitalCard}>
-      <CustomText
-        fontFamily={FontType.Roboto_Medium}
-        color={Colors.neutral80}
-        fontSize={responsiveFontSize(2)}>
-        {item?.name}
-      </CustomText>
-      <View style={{borderWidth: 0.6, borderColor: Colors.neutral5}} />
-      <Row>
-        <CustomText color={Colors.neutral60} fontSize={responsiveFontSize(1.8)}>
-          {item?.vital?.[0]?.label} :
-        </CustomText>
-        <CustomText color={Colors.neutral80} fontSize={responsiveFontSize(1.8)}>
-          {item?.vital?.[0]?.value}
+      <Row style={{left:-3}}>
+        {icon && <View style={styles.iconContainer}>{icon}</View>}
+        <CustomText
+          fontFamily={FontType.Roboto_Medium}
+          color={Colors.neutral80}
+          fontSize={responsiveFontSize(2)}>
+          {item?.name}
         </CustomText>
       </Row>
-      <Row>
-        <CustomText color={Colors.neutral60} fontSize={responsiveFontSize(1.8)}>
-          {item?.vital?.[1]?.label} :
-        </CustomText>
-        <CustomText color={Colors.neutral80} fontSize={responsiveFontSize(1.8)}>
-          {item?.vital?.[1]?.value}
-        </CustomText>
+      <Row style={{justifyContent:'space-between'}}>
+        <Row>
+          <CustomText
+            color={Colors.neutral60}
+            fontSize={responsiveFontSize(1.6)}
+            fontFamily={FontType.Roboto_Medium}>
+            {item?.value}{' '}
+          </CustomText>
+          <CustomText
+            color={Colors.neutral40}
+            fontSize={responsiveFontSize(1.3)}>
+            {item?.unit}
+          </CustomText>
+        </Row>
+        <Row>
+          <CustomText
+            color={Colors.neutral50}
+            fontSize={responsiveFontSize(1.3)}>
+            {formatDate(item?.date)}
+          </CustomText>
+        </Row>
       </Row>
     </Card>
   );
@@ -44,9 +60,11 @@ export default VitalCard;
 
 const styles = StyleSheet.create({
   vitalCard: {
-    width: responsiveWidth(50),
-    marginRight: responsiveWidth(3),
+    width: '49%',
     height: null,
     padding: 7,
+  },
+  iconContainer: {
+    marginRight: 5,
   },
 });

@@ -12,6 +12,11 @@ const CustomIcon = ({name, size, color, focused}: any) => {
   let iconContent;
 
   switch (name) {
+    case 'drawer':
+      iconContent = (
+        <View></View>
+      );
+      break;
     case 'home':
       iconContent = (
         <View style={focused ? styles.focusedStyles : styles.unFocusedStyles}>

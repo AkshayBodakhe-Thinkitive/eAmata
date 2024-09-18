@@ -5,25 +5,29 @@ export const staticEventData = [
 ];
 
 export const staticVitalsData = [
-    {
-      name: 'Blood Pressure',
-      vital: [
-        {label: 'Pressure', value: '115/90 mmHg'},
-        {label: 'Heart Rate:', value: '72 BPM'},
-      ],
-    },
-    {
-      name: 'Glucose',
-      vital: [
-        {label: 'Before Meal', value: '115 mmHg'},
-        {label: 'After Meal', value: 'mmHg'},
-      ],
-    },
-    {
-      name: 'Glucose',
-      vital: [
-        {label: 'Pressure', value: '115/90 mmHg'},
-        {label: 'Heart Rate:', value: '72 BPM'},
-      ],
-    },
+  {
+    name: 'Blood Pressure',
+    value: '115/90',
+    unit: 'mmHg',
+    date: '2024-09-18T00:00:00Z',
+  },
+  {
+    name: 'Heart Rate',
+    value: '115',
+    unit: 'bpm', 
+    date: '2024-09-18T00:00:00Z',
+  },
+  {
+    name: 'Weight',
+    value: '115/90',
+    unit: 'pounds', 
+    date: '2024-09-18T00:00:00Z',
+  },
+  {
+    name: 'Blood Glucose',
+    value: '115/90',
+    unit: 'mm/dl', 
+    date: '2024-09-18T00:00:00Z',
+  },
   ]
+

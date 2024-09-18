@@ -22,9 +22,10 @@ import {FontType} from '../../constants/FontType';
 
 interface Props {
   title?: any;
+  hideprofileIcon? : boolean
 }
 
-const CommonHeader = ({title}: Props) => {
+const CommonHeader = ({title,hideprofileIcon}: Props) => {
   const navigation = useNavigation<any>();
   const openDrawer = () => {
     navigation.dispatch(DrawerActions.openDrawer());
@@ -47,7 +48,7 @@ const CommonHeader = ({title}: Props) => {
             </View>
           )}
         </Row>
-        <Row style={{width: '30%'}}>
+        <Row style={{width: hideprofileIcon ? '15%' : '30%'}}>
           <TouchableOpacity style={styles.bellTouch}>
             <MaterialIcons name="notifications-none" style={styles.bellIcon} />
             {notificationCount > 0 && (
@@ -56,10 +57,10 @@ const CommonHeader = ({title}: Props) => {
               </View>
             )}
           </TouchableOpacity>
-          <Image
+         {!hideprofileIcon && <Image
             source={ImagePath.avatar}
             style={{resizeMode: 'contain', height: responsiveHeight(3.5)}}
-          />
+          />}
         </Row>
       </Row>
     </Header>

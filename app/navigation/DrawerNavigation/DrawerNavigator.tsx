@@ -19,6 +19,13 @@ import {ImagePath} from '../../constants/ImagePaths';
 import Row from '../../components/Row/Row';
 import {FeatherIcon} from '../../components/Icons/FeatherIcon';
 import { AppNavConstants } from '../../constants/NavConstants';
+import CarePlanMain from '../../domain/careplan/screens/CarePlanMain';
+import HomeScreen from '../../domain/home/screen/HomeScreen';
+import AllergiesScreen from '../../domain/medical-records/screens/AllergiesScreen';
+import MedicationsMain from '../../domain/medical-records/screens/MedicationsMain';
+import AssignedDevices from '../../domain/medical-records/screens/AssignedDevices';
+import ConsentsScreen from '../../domain/medical-records/screens/ConsentsScreen';
+import Resources from '../../domain/medical-records/screens/Resources';
 
 const Drawer = createDrawerNavigator();
 
@@ -39,6 +46,17 @@ const DrawerNavigator = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const drawerItems: any = [
+    {
+      label: 'Home',
+      icon: (
+        <MaterialCommunityIcons
+          name="home-outline"
+          size={21}
+          color={Colors.primary80}
+        />
+      ),
+      onPress: () => navigation.navigate('HomeSc'),
+    },
     {
       label: 'Care Plan',
       icon : <ImageIcon imagePath={ImagePath.clinical_notes}/>,
@@ -159,10 +177,58 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
       initialRouteName="HomeSc"
+      screenOptions={{
+        unmountOnBlur: true,
+        headerShown: false,
+      }}
       drawerContent={props => <CustomDrawerContent {...props} />}>
       <Drawer.Screen
         name="HomeSc"
-        component={BottomBar}
+        component={HomeScreen}
+      />
+       <Drawer.Screen
+        name={AppNavConstants.CARE_PLAN}
+        component={CarePlanMain}
+        options={{
+          unmountOnBlur: true,
+          headerShown: false,
+        }}
+      />
+        <Drawer.Screen
+        name={AppNavConstants.ALLERGIES}
+        component={AllergiesScreen}
+        options={{
+          unmountOnBlur: true,
+          headerShown: false,
+        }}
+      />
+        <Drawer.Screen
+        name={AppNavConstants.MEDICATIONS}
+        component={MedicationsMain}
+        options={{
+          unmountOnBlur: true,
+          headerShown: false,
+        }}
+      />
+        <Drawer.Screen
+        name={AppNavConstants.ASSIGNED_DEVICES}
+        component={AssignedDevices}
+        options={{
+          unmountOnBlur: true,
+          headerShown: false,
+        }}
+      />
+        <Drawer.Screen
+        name={AppNavConstants.CONSENTS}
+        component={ConsentsScreen}
+        options={{
+          unmountOnBlur: true,
+          headerShown: false,
+        }}
+      />
+       <Drawer.Screen
+        name={AppNavConstants.RESOURCES}
+        component={Resources}
         options={{
           unmountOnBlur: true,
           headerShown: false,
