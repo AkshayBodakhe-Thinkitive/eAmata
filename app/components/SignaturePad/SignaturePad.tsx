@@ -114,7 +114,7 @@ const SignaturePad = ({setIsDrawing, onOK, dataUrl}: SignaturePadProps) => {
           <TouchableOpacity
             onPress={handleClear}
             style={{alignItems: 'center', justifyContent: 'center',height:'100%'}}>
-            <Text style={{fontFamily:FontType.Roboto_Regular,fontSize:responsiveFontSize(2)}}>Remove</Text>
+            <Text style={{fontFamily:FontType.Roboto_Regular,fontSize:responsiveFontSize(2),color:Colors.neutral90}}>Remove</Text>
           </TouchableOpacity>
         </View>
       </View>

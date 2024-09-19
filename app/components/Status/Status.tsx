@@ -15,6 +15,8 @@ const Status = ({status}: any) => {
         return {backgroundColor: Colors.positive5, color: Colors.positive60}; 
       case 'cancelled':
         return {backgroundColor: Colors.negative1, color: Colors.negative60}; 
+        case 'assigned':
+          return {backgroundColor: Colors.warning5, color: Colors.warning70}; 
       default:
         return {backgroundColor: '#E0E0E0', color: '#757575'};
     }

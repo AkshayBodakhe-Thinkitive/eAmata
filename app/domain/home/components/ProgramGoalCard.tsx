@@ -83,7 +83,7 @@ const ProgramGoalCard = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                  <Text style={{fontFamily: FontType.Roboto_Medium}}>{item[3]}</Text>
+                  <Text style={{fontFamily: FontType.Roboto_Medium,color:Colors.neutral80}}>{item[3]}</Text>
                 </View>
               </Row>
             </Card>

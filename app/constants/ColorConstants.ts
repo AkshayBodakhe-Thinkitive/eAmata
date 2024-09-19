@@ -4,7 +4,9 @@ export const Colors = {
     white : 'white',
 
     primary : '#006D8F',
+    primary1 : '#EEFBFF',
     primary5 : '#DCF7FF',
+    primary40 : '#078EB9',
     primary70 : '#023F53',
     primary80 : '#032F3D',
 

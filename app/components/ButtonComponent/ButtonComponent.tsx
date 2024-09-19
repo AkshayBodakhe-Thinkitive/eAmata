@@ -4,11 +4,12 @@ import {
   Text,
   TextStyle,
   TouchableOpacity,
+  View,
   ViewStyle,
 } from 'react-native';
 import React from 'react';
 import {ButtonComponentStyles as styles} from './ButtonComponentStyles';
-import { Colors } from '../../constants/ColorConstants';
+import {Colors} from '../../constants/ColorConstants';
 
 const Button = ({
   title,
@@ -17,7 +18,8 @@ const Button = ({
   textStyle,
   disabled,
   outlined,
-  loading
+  loading,
+  leftIcon,
 }: Props) => {
   return (
     <TouchableOpacity
@@ -29,19 +31,24 @@ const Button = ({
       ]}
       onPress={onPress}
       disabled={disabled}>
-      {loading ? (
-        <ActivityIndicator
-          color={outlined ? Colors.primary : Colors.white}></ActivityIndicator>
-      ) : (
-        <Text
-          style={[
-            styles.btnText,
-            textStyle,
-            outlined && {color: Colors.primary},
-          ]}>
-          {title}
-        </Text>
-      )}
+      <View style={{flexDirection: 'row'}}>
+        <View>{leftIcon}</View>
+        {loading ? (
+          <ActivityIndicator
+            color={
+              outlined ? Colors.primary : Colors.white
+            }></ActivityIndicator>
+        ) : (
+          <Text
+            style={[
+              styles.btnText,
+              textStyle,
+              outlined && {color: Colors.primary},
+            ]}>
+            {title}
+          </Text>
+        )}
+      </View>
     </TouchableOpacity>
   );
 };
@@ -55,5 +62,6 @@ interface Props {
   textStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
   outlined?: boolean;
-  loading?:boolean
+  loading?: boolean;
+  leftIcon?: React.ReactNode;
 }

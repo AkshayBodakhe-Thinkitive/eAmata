@@ -22,4 +22,5 @@ export const ImagePath = {
     water_drop : require('../assets/images/water_drop.png'),    
     weight : require('../assets/images/weight.png'), 
     pill : require('../assets/images/pill.png'),    
+    deviceimage : require('../assets/images/deviceimage.png'),   
 }

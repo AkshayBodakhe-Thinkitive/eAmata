@@ -28,6 +28,7 @@ import ConsentsScreen from '../../domain/medical-records/screens/ConsentsScreen'
 import Resources from '../../domain/medical-records/screens/Resources';
 import { useAppSelector } from '../../store/hooks';
 import { RootState } from '../../store/storeConfig';
+import ConsentFormScreen from '../../domain/auth/screens/ConsentFormScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -74,28 +75,6 @@ const DrawerNavigator = () => {
       icon: <ImageIcon imagePath={ImagePath.clinical_notes} />,
       onPress: () => navigation.navigate(AppNavConstants.CARE_PLAN),
     },
-    // {
-    //   label: 'Clinical',
-    //   icon: (
-    //     <MaterialCommunityIcons
-    //       name="home-plus-outline"
-    //       size={21}
-    //       color={Colors.primary80}
-    //     />
-    //   ),
-    //   subItems: [
-    //     {
-    //       label: 'Allergies',
-    //       icon : <ImageIcon imagePath={ImagePath.allergies}/>,
-    //       onPress: () => navigation.navigate(AppNavConstants.ALLERGIES),
-    //     },
-    //     {
-    //       label: 'Medications',
-    //       icon : <ImageIcon imagePath={ImagePath.medication_liquid}/>,
-    //       onPress: () => navigation.navigate(AppNavConstants.MEDICATIONS),
-    //     },
-    //   ],
-    // },
     {
       label: 'Assigned Devices',
       icon: <ImageIcon imagePath={ImagePath.browse_activity} />,
@@ -204,22 +183,6 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name={AppNavConstants.ALLERGIES}
-        component={AllergiesScreen}
-        options={{
-          unmountOnBlur: true,
-          headerShown: false,
-        }}
-      />
-      <Drawer.Screen
-        name={AppNavConstants.MEDICATIONS}
-        component={MedicationsMain}
-        options={{
-          unmountOnBlur: true,
-          headerShown: false,
-        }}
-      />
-      <Drawer.Screen
         name={AppNavConstants.ASSIGNED_DEVICES}
         component={AssignedDevices}
         options={{
@@ -238,6 +201,14 @@ const DrawerNavigator = () => {
       <Drawer.Screen
         name={AppNavConstants.RESOURCES}
         component={Resources}
+        options={{
+          unmountOnBlur: true,
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name={'viewconsent'}
+        component={ConsentFormScreen}
         options={{
           unmountOnBlur: true,
           headerShown: false,
