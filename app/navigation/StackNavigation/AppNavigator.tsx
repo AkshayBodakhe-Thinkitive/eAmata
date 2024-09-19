@@ -13,7 +13,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={AppNavConstants.MAIN}
+        initialRouteName={AppNavConstants.SPLASHSCREEN}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name={AppNavConstants.SPLASHSCREEN} component={SplashScreen} />
         <Stack.Screen name={AppNavConstants.AUTH} component={AuthNavigator} />

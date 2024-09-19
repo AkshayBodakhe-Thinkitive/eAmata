@@ -19,6 +19,8 @@ import {ImagePath} from '../../constants/ImagePaths';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import {Colors} from '../../constants/ColorConstants';
 import {FontType} from '../../constants/FontType';
+import { useAppDispatch } from '../../store/hooks';
+import { openDrawer } from '../../navigation/NavigationReducer';
 
 interface Props {
   title?: any;
@@ -26,17 +28,24 @@ interface Props {
 }
 
 const CommonHeader = ({title,hideprofileIcon}: Props) => {
+
   const navigation = useNavigation<any>();
-  const openDrawer = () => {
+
+  const dispatch = useAppDispatch()
+
+  const openDrawerFun = () => {
     navigation.dispatch(DrawerActions.openDrawer());
+    // dispatch(openDrawer())
   };
+
+
 
   const notificationCount = 3;
   return (
     <Header>
       <Row style={styles.headerRow}>
         <Row>
-          <TouchableOpacity onPress={openDrawer}>
+          <TouchableOpacity onPress={openDrawerFun}>
             <Ionicons name="reorder-three" style={styles.threebar} />
           </TouchableOpacity>
           {title ? (

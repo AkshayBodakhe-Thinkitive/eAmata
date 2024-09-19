@@ -1,5 +1,5 @@
 import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   DrawerContentScrollView,
   createDrawerNavigator,
@@ -18,7 +18,7 @@ import {Colors} from '../../constants/ColorConstants';
 import {ImagePath} from '../../constants/ImagePaths';
 import Row from '../../components/Row/Row';
 import {FeatherIcon} from '../../components/Icons/FeatherIcon';
-import { AppNavConstants } from '../../constants/NavConstants';
+import {AppNavConstants} from '../../constants/NavConstants';
 import CarePlanMain from '../../domain/careplan/screens/CarePlanMain';
 import HomeScreen from '../../domain/home/screen/HomeScreen';
 import AllergiesScreen from '../../domain/medical-records/screens/AllergiesScreen';
@@ -26,6 +26,8 @@ import MedicationsMain from '../../domain/medical-records/screens/MedicationsMai
 import AssignedDevices from '../../domain/medical-records/screens/AssignedDevices';
 import ConsentsScreen from '../../domain/medical-records/screens/ConsentsScreen';
 import Resources from '../../domain/medical-records/screens/Resources';
+import { useAppSelector } from '../../store/hooks';
+import { RootState } from '../../store/storeConfig';
 
 const Drawer = createDrawerNavigator();
 
@@ -45,6 +47,16 @@ const ImageIcon = ({imagePath}: any) => {
 const DrawerNavigator = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
+  const openDrawer = useAppSelector((state:RootState)=>state.nav.showDrawer)
+
+  // useEffect(()=>{
+  //   if(openDrawer){
+  //     navigation.dispatch(DrawerActions.openDrawer());
+  //   } else{
+  //     navigation.dispatch(DrawerActions.closeDrawer());
+  //   }
+  // },[openDrawer])
+
   const drawerItems: any = [
     {
       label: 'Home',
@@ -59,39 +71,39 @@ const DrawerNavigator = () => {
     },
     {
       label: 'Care Plan',
-      icon : <ImageIcon imagePath={ImagePath.clinical_notes}/>,
+      icon: <ImageIcon imagePath={ImagePath.clinical_notes} />,
       onPress: () => navigation.navigate(AppNavConstants.CARE_PLAN),
     },
-    {
-      label: 'Clinical',
-      icon: (
-        <MaterialCommunityIcons
-          name="home-plus-outline"
-          size={21}
-          color={Colors.primary80}
-        />
-      ),
-      subItems: [
-        {
-          label: 'Allergies',
-          icon : <ImageIcon imagePath={ImagePath.allergies}/>,
-          onPress: () => navigation.navigate(AppNavConstants.ALLERGIES),
-        },
-        {
-          label: 'Medications',
-          icon : <ImageIcon imagePath={ImagePath.medication_liquid}/>,
-          onPress: () => navigation.navigate(AppNavConstants.MEDICATIONS),
-        },
-      ],
-    },
+    // {
+    //   label: 'Clinical',
+    //   icon: (
+    //     <MaterialCommunityIcons
+    //       name="home-plus-outline"
+    //       size={21}
+    //       color={Colors.primary80}
+    //     />
+    //   ),
+    //   subItems: [
+    //     {
+    //       label: 'Allergies',
+    //       icon : <ImageIcon imagePath={ImagePath.allergies}/>,
+    //       onPress: () => navigation.navigate(AppNavConstants.ALLERGIES),
+    //     },
+    //     {
+    //       label: 'Medications',
+    //       icon : <ImageIcon imagePath={ImagePath.medication_liquid}/>,
+    //       onPress: () => navigation.navigate(AppNavConstants.MEDICATIONS),
+    //     },
+    //   ],
+    // },
     {
       label: 'Assigned Devices',
-      icon : <ImageIcon imagePath={ImagePath.browse_activity}/>,
+      icon: <ImageIcon imagePath={ImagePath.browse_activity} />,
       onPress: () => navigation.navigate(AppNavConstants.ASSIGNED_DEVICES),
     },
     {
       label: 'Consents',
-      icon : <ImageIcon imagePath={ImagePath.handshake}/>,
+      icon: <ImageIcon imagePath={ImagePath.handshake} />,
       onPress: () => navigation.navigate(AppNavConstants.CONSENTS),
     },
     {
@@ -152,7 +164,7 @@ const DrawerNavigator = () => {
         ))}
 
         <View style={styles.drawerItemContainer} />
-        <View>
+        <View style={{borderWidth: 0, marginTop: '110%'}}>
           <CustomDrawerItem
             label="Log Out"
             icon={
@@ -182,11 +194,8 @@ const DrawerNavigator = () => {
         headerShown: false,
       }}
       drawerContent={props => <CustomDrawerContent {...props} />}>
+      <Drawer.Screen name="HomeSc" component={HomeScreen} />
       <Drawer.Screen
-        name="HomeSc"
-        component={HomeScreen}
-      />
-       <Drawer.Screen
         name={AppNavConstants.CARE_PLAN}
         component={CarePlanMain}
         options={{
@@ -194,7 +203,7 @@ const DrawerNavigator = () => {
           headerShown: false,
         }}
       />
-        <Drawer.Screen
+      <Drawer.Screen
         name={AppNavConstants.ALLERGIES}
         component={AllergiesScreen}
         options={{
@@ -202,7 +211,7 @@ const DrawerNavigator = () => {
           headerShown: false,
         }}
       />
-        <Drawer.Screen
+      <Drawer.Screen
         name={AppNavConstants.MEDICATIONS}
         component={MedicationsMain}
         options={{
@@ -210,7 +219,7 @@ const DrawerNavigator = () => {
           headerShown: false,
         }}
       />
-        <Drawer.Screen
+      <Drawer.Screen
         name={AppNavConstants.ASSIGNED_DEVICES}
         component={AssignedDevices}
         options={{
@@ -218,7 +227,7 @@ const DrawerNavigator = () => {
           headerShown: false,
         }}
       />
-        <Drawer.Screen
+      <Drawer.Screen
         name={AppNavConstants.CONSENTS}
         component={ConsentsScreen}
         options={{
@@ -226,7 +235,7 @@ const DrawerNavigator = () => {
           headerShown: false,
         }}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name={AppNavConstants.RESOURCES}
         component={Resources}
         options={{

@@ -13,14 +13,8 @@ import HomeScreen from '../../domain/home/screen/HomeScreen';
 import EventsScreen from '../../domain/events/screens/EventsScreen';
 import VitalsScreen from '../../domain/vitals/screens/VitalsScreen';
 import DrawerNavigator from '../DrawerNavigation/DrawerNavigator';
+import MedsScreen from '../../domain/medical-records/screens/MedsScreen';
 
-const ChatbotScreen = () => {
-  return (
-    <View>
-      <Text>Meds</Text>
-    </View>
-  );
-};
 
 const PlusButton = ({onPress}: any) => {
   return (
@@ -88,7 +82,7 @@ const BottomBar = () => {
       />
 
       <Tab.Screen name="Vitals" component={VitalsScreen} />
-      <Tab.Screen name="Meds" component={ChatbotScreen} />
+      <Tab.Screen name="Meds" component={MedsScreen} />
     </Tab.Navigator>
   );
 };
@@ -134,17 +128,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: Platform.OS === 'ios' ? responsiveHeight(10) : responsiveHeight(8),
+    height: Platform.OS === 'ios' ? responsiveHeight(10) : responsiveHeight(9),
     backgroundColor: 'white',
     paddingHorizontal: 20,
     position: 'relative',
     shadowOpacity: 0.1,
+    elevation:4
   },
   tabButton: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    top: '-2%',
+    top: Platform.OS === 'ios' ? '-2%' : 0,
   },
   plusButton: {
     position: 'absolute',

@@ -18,6 +18,7 @@ export const Homescreenstyles = StyleSheet.create({
   titleTxt : {
     fontFamily : FontType.Roboto_Medium,
     fontSize : responsiveFontSize(1.8),
-    marginBottom : responsiveHeight(1.2)
+    marginBottom : responsiveHeight(1.2),
+    color : Colors.neutral90
   }
 });

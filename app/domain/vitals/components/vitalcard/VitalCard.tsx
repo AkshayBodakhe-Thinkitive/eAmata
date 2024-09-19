@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {Colors} from '../../../constants/ColorConstants';
-import Row from '../../../components/Row/Row';
+import {Colors} from '../../../../constants/ColorConstants';
+import Row from '../../../../components/Row/Row';
 import {
   responsiveFontSize,
   responsiveHeight,
 } from 'react-native-responsive-dimensions';
-import {FontType} from '../../../constants/FontType';
-import {MaterialIcons} from '../../../components/Icons/MaterialIcons';
+import {FontType} from '../../../../constants/FontType';
+import {MaterialIcons} from '../../../../components/Icons/MaterialIcons';
 
 interface HealthMetricProps {
   title: string;

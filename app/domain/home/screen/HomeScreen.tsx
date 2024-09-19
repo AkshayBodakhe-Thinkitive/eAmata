@@ -45,7 +45,7 @@ const HomeScreen = ({navigation}: any) => {
             }}
           />
         </View>
-        <View>
+        <View style={{marginBottom:50}}>
           <Text style={styles.titleTxt}>Program and Goals</Text>
           <ProgramGoalCard></ProgramGoalCard>
         </View>

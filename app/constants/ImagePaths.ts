@@ -20,5 +20,6 @@ export const ImagePath = {
     cardiology : require('../assets/images/cardiology.png'),    
     glucose : require('../assets/images/glucose.png'),    
     water_drop : require('../assets/images/water_drop.png'),    
-    weight : require('../assets/images/weight.png'),    
+    weight : require('../assets/images/weight.png'), 
+    pill : require('../assets/images/pill.png'),    
 }

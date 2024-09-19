@@ -1,21 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import Row from '../../../components/Row/Row';
 import Card from '../../../components/Card/Card';
-import { Colors } from '../../../constants/ColorConstants';
-import { FontType } from '../../../constants/FontType';
-import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import {Colors} from '../../../constants/ColorConstants';
+import {FontType} from '../../../constants/FontType';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import {ImagePath} from '../../../constants/ImagePaths';
 
-const MedicationCard = ({ medication }: any) => {
+const MedicationCard = ({medication}: any) => {
   return (
     <Card style={styles.card}>
       <Row style={styles.titleContainer}>
-        <Text style={styles.title}>{medication?.name}</Text>
+        <Row>
+          <Image source={ImagePath.pill} style={styles.iconStyle} />
+          <Text style={styles.title}>{medication?.name}</Text>
+        </Row>
+        <View style={styles.dosageView}>
+          <Text
+            style={{
+              fontFamily: FontType.Roboto_Medium,
+              color: Colors.neutral70,
+            }}>
+            {medication?.dosage}
+          </Text>
+        </View>
       </Row>
-      {/* <Row style={styles.row}>
-        <Text style={styles.label}>Dosage:</Text>
-        <Text style={styles.value}>{medication?.dosage}</Text>
-      </Row> */}
       <Row style={styles.row}>
         <Text style={styles.label}>Dispense:</Text>
         <Text style={styles.value}>{medication?.dispense}</Text>
@@ -40,9 +53,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '100%',
     height: null,
+    paddingTop: 10,
   },
   row: {
-    // borderWidth: 1,
     alignItems: 'flex-start',
     paddingVertical: 5,
     flexWrap: 'wrap',
@@ -52,13 +65,13 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     borderColor: Colors.neutral5,
     marginBottom: 5,
-    alignItems: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: responsiveFontSize(2),
     fontFamily: FontType.Roboto_Medium,
     color: Colors.neutral60,
-    marginBottom: 5,
     marginRight: 6,
   },
   label: {
@@ -72,6 +85,20 @@ const styles = StyleSheet.create({
     color: Colors.neutral80,
     fontFamily: FontType.Roboto_Regular,
     width: '70%',
+  },
+  iconStyle: {
+    height: responsiveHeight(3),
+    resizeMode: 'contain',
+    borderWidth: 0,
+    width: responsiveWidth(5),
+    marginRight: 5,
+  },
+  dosageView: {
+    backgroundColor: Colors.neutral5,
+    borderRadius: 16,
+    width: responsiveWidth(20),
+    alignItems: 'center',
+    paddingVertical: 3,
   },
 });
 

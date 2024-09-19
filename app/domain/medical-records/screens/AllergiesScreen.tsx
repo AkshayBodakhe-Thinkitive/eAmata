@@ -1,7 +1,6 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Colors} from '../../../constants/ColorConstants';
-import CommonHeader from '../../../components/Header/CommonHeader';
 import AllergyCard from '../components/AllergyCard';
 
 const AllergiesScreen = () => {
@@ -9,7 +8,7 @@ const AllergiesScreen = () => {
     {
       name: 'Dust Allergy',
       status: 'Active',
-      type : 'Environment',
+      type: 'Environment',
       severity: 'Moderate',
       reactions: 'Sneezing, coughing',
       note: 'Please ensure the patient is in a dust-free environment. Wear mask and take regular steams.',
@@ -17,7 +16,7 @@ const AllergiesScreen = () => {
     {
       name: 'Soy Food',
       status: 'Active',
-      type : 'Food',
+      type: 'Food',
       severity: 'Sever',
       reactions: 'Itchy skin and gastrointestinal discomfort',
       note: 'Avoid eating soy. If taken mistakenly, contact the doctor.',
@@ -26,7 +25,6 @@ const AllergiesScreen = () => {
 
   return (
     <View style={styles.container}>
-      <CommonHeader title={'Allergies'} hideprofileIcon></CommonHeader>
       <FlatList
         data={allergiesData}
         style={{

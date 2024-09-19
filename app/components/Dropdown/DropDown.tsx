@@ -1,14 +1,8 @@
 import React, {useState} from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
-import {
-  View,
-  Text,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import {View, Text, StyleProp, TextStyle, ViewStyle} from 'react-native';
 import {DropdownStyles as styles} from './DropdownStyles';
-import { Colors } from '../../constants/ColorConstants';
+import {Colors} from '../../constants/ColorConstants';
 
 const DropdownComponent = ({
   style,
@@ -26,7 +20,7 @@ const DropdownComponent = ({
   isValid,
   errorText,
   dropDownStyles,
-  required
+  required,
 }: DropdownComponentProps) => {
   const dropdowndata = [{label: '', value: ''}];
 
@@ -34,13 +28,17 @@ const DropdownComponent = ({
 
   return (
     <View style={[styles.container, style]}>
-      {label && <Text style={styles.labelStyles}>{label} {required && (<Text style={{color:'red'}}>*</Text>)}</Text>}
+      {label && (
+        <Text style={styles.labelStyles}>
+          {label} {required && <Text style={{color: 'red'}}>*</Text>}
+        </Text>
+      )}
       <Dropdown
         style={[
           styles.dropdown,
           isValid && {borderColor: Colors.negative50, borderWidth: 0.5},
           dropDownStyles,
-          disable && {backgroundColor : Colors.neutral40}
+          disable && {backgroundColor: Colors.neutral40},
         ]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
@@ -63,7 +61,7 @@ const DropdownComponent = ({
         onChange={(item: any) => {
           setValue(item.value);
 
-          onValueChange(item?.value, item?.id);
+          onValueChange && onValueChange(item?.value, item?.id);
           if (onKeyChange) {
             onKeyChange(item?.label);
           }
@@ -81,8 +79,8 @@ const DropdownComponent = ({
 export default DropdownComponent;
 
 interface DropdownComponentProps {
-  style?: StyleProp<ViewStyle>
-  dropDownStyles?:StyleProp<ViewStyle>,
+  style?: StyleProp<ViewStyle>;
+  dropDownStyles?: StyleProp<ViewStyle>;
   label?: string;
   placeholderStyle?: StyleProp<TextStyle>;
   selectedTextStyle?: StyleProp<TextStyle>;
@@ -108,5 +106,5 @@ interface DropdownComponentProps {
   disable?: boolean;
   isValid?: boolean;
   errorText?: string;
-  required?:boolean
+  required?: boolean;
 }

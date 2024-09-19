@@ -47,8 +47,7 @@ export default useVitalIcon;
 
 const styles = StyleSheet.create({
     iconStyles : {
-        width: responsiveWidth(7), 
+        width: responsiveWidth(6), 
         height: responsiveHeight(4),
-        // borderWidth:1
     }
 })

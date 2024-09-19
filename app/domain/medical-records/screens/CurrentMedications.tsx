@@ -3,34 +3,11 @@ import React from 'react';
 import MedicationCard from '../components/MedicationCard';
 import { Colors } from '../../../constants/ColorConstants';
 
-const CurrentMedications = () => {
-  const medicationData = [
-    {
-      name: 'Aciloc 150',
-      dosage: '2 per day',
-      dispense: '8 Tablets',
-      when: 'Before Meal',
-      startDate: '10 Jan 2024',
-    },
-    {
-      name: 'Dolo 650',
-      dosage: '2 per day',
-      dispense: '8 Tablets',
-      when: 'After Meal',
-      startDate: '10 Jan 2024',
-    },
-    {
-      name: 'Benadryl Syrup',
-      dosage: '3 per day',
-      dispense: '5ml',
-      when: 'After Meal',
-      startDate: '10 Jan 2024',
-    },
-  ];
+const CurrentMedications = ({data}:any) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={medicationData}
+        data={data}
         style={{
           flex: 1,
         }}

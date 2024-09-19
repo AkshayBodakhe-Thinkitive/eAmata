@@ -77,7 +77,12 @@ const styles = StyleSheet.create({
     fontFamily: FontType.Roboto_Regular,
     width: '70%',
   },
-  typeView: {borderRadius: 8, backgroundColor: Colors.primary5},
+  typeView: {
+    borderRadius: 16,
+    backgroundColor: Colors.primary5,
+    paddingHorizontal: 8,
+    marginLeft: 5,
+  },
   alergyType: {
     fontFamily: FontType.Roboto_Medium,
     padding: 3,
