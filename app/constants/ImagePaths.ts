@@ -19,8 +19,13 @@ export const ImagePath = {
     medication_liquid : require('../assets/images/medication_liquid.png'),    
     cardiology : require('../assets/images/cardiology.png'),    
     glucose : require('../assets/images/glucose.png'),    
+    glucose_focused : require('../assets/images/glucose_focused.png'),    
     water_drop : require('../assets/images/water_drop.png'),    
+    drop_focused : require('../assets/images/drop_focused.png'),    
     weight : require('../assets/images/weight.png'), 
+    weight_focused : require('../assets/images/weight_focused.png'), 
     pill : require('../assets/images/pill.png'),    
-    deviceimage : require('../assets/images/deviceimage.png'),   
+    deviceimage : require('../assets/images/deviceimage.png'),  
+    group :  require('../assets/images/group.png'),  
 }
+

@@ -1,7 +1,9 @@
 import {
   Image,
+  KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -16,38 +18,54 @@ import {ImagePath} from '../../../constants/ImagePaths';
 import {FontType} from '../../../constants/FontType';
 import CustomText from '../../../components/Text/CustomText';
 import TextInput from '../../../components/TextInput/TextInput';
-import {AuthNavConstants} from '../../../constants/NavConstants';
+import {AppNavConstants, AuthNavConstants} from '../../../constants/NavConstants';
 import BottomButton from '../components/BottomButton/BottomButton';
+import {useAppSelector} from '../../../store/hooks';
+import {RootState} from '../../../store/storeConfig';
 
 const ResetPasswordScreen = ({navigation}: any) => {
+  const isOnboarded = useAppSelector(
+    (state: RootState) => state.auth.isOnboarded,
+  );
+
   const handleSubmit = () => {
-    navigation.navigate(AuthNavConstants.completeprofile);
+    if (isOnboarded) {
+      navigation.navigate(AppNavConstants.MAIN);
+    } else {
+      navigation.navigate(AuthNavConstants.completeprofile);
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.page}>
-        <Image source={ImagePath.resetpass} style={styles.imageStyle} />
-        <Text style={styles.h}>Create a secure password</Text>
-        <CustomText
-          style={{marginBottom: '10%'}}
-          color={Colors.neutral50}
-          fontSize={responsiveFontSize(2)}>
-          Choose a strong password to protect your account and keep your
-          information safe.
-        </CustomText>
-        <TextInput
-          label="Set Password"
-          placeholder="Enter Password"
-          secureTextEntry
-          style={{marginBottom: '6%'}}
-        />
-        <TextInput
-          label="Confirm Password"
-          placeholder="Enter Password"
-          secureTextEntry
-        />
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{flex: 1}}>
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <View style={styles.page}>
+            <Image source={ImagePath.resetpass} style={styles.imageStyle} />
+            <Text style={styles.h}>Create a secure password</Text>
+            <CustomText
+              style={{marginBottom: '10%'}}
+              color={Colors.neutral50}
+              fontSize={responsiveFontSize(2)}>
+              Choose a strong password to protect your account and keep your
+              information safe.
+            </CustomText>
+            <TextInput
+              label="Set Password"
+              placeholder="Enter Password"
+              secureTextEntry
+              style={{marginBottom: '6%'}}
+            />
+            <TextInput
+              label="Confirm Password"
+              placeholder="Enter Password"
+              secureTextEntry
+            />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
       <BottomButton title="Set Password & Login" onPress={handleSubmit} />
     </SafeAreaView>
   );

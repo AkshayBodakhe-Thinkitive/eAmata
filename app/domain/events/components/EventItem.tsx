@@ -1,10 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Status from '../../../components/Status/Status';
-import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
-import { FontType } from '../../../constants/FontType';
-import { Colors } from '../../../constants/ColorConstants';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+} from 'react-native-responsive-dimensions';
+import {FontType} from '../../../constants/FontType';
+import {Colors} from '../../../constants/ColorConstants';
 import moment from 'moment';
+import {useNavigation} from '@react-navigation/native';
+import {AppNavConstants} from '../../../constants/NavConstants';
 
 const getRelativeDateLabel = (date: string) => {
   const today = moment().startOf('day');
@@ -25,13 +30,28 @@ const getFormattedDateTime = (dateTime: string) => {
   return moment(dateTime, moment.ISO_8601).format('MMM DD, YYYY hh:mm A');
 };
 
-const EventItem = ({ dateKey, type, startDate, status, showDate }: any) => {
+const EventItem = ({
+  dateKey,
+  type,
+  startDate,
+  status,
+  showDate,
+  eventType,
+}: any) => {
+  const navigation = useNavigation<any>();
+
+  const handleTouch = () => {
+    if (eventType === 'virtual') {
+      navigation.navigate(AppNavConstants.VIRTUAL_EVENT_START);
+    }
+  };
+
   return (
     <View>
       {showDate && (
         <Text style={styles.dateHeader}>{getRelativeDateLabel(dateKey)}</Text>
       )}
-      <View style={styles.eventItem}>
+      <TouchableOpacity style={styles.eventItem} onPress={handleTouch}>
         <View style={styles.eventDetails}>
           <Text style={styles.eventType}>{type}</Text>
           <Text style={styles.eventDate}>
@@ -39,7 +59,7 @@ const EventItem = ({ dateKey, type, startDate, status, showDate }: any) => {
           </Text>
         </View>
         <Status status={status} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -61,17 +81,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: Colors.neutral5,
   },
-  eventDetails: {
-
-  },
+  eventDetails: {},
   eventType: {
-   color : Colors.primary70,
-   fontFamily : FontType.Roboto_Medium,
-   fontSize : responsiveFontSize(1.8),
-   marginBottom : 5
+    color: Colors.primary70,
+    fontFamily: FontType.Roboto_Medium,
+    fontSize: responsiveFontSize(1.8),
+    marginBottom: 5,
   },
-  eventDate : {
-    color : Colors.neutral50,
-    fontFamily : FontType.Roboto_Regular
-  }
+  eventDate: {
+    color: Colors.neutral50,
+    fontFamily: FontType.Roboto_Regular,
+  },
 });

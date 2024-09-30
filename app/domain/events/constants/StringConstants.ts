@@ -23,6 +23,7 @@ export  const infusionData: any = [
       startDate: '2024-09-17T00:00:00Z',
       startTime: '23:00:00',
       endDate: null,
+      eventType : 'virtual'
     },
     {
       id: 4,

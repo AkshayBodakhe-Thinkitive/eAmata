@@ -17,7 +17,7 @@ const ConsentFormScreen = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <Header title={item?.name} />
-      <ScrollView style={styles.page}>
+      <ScrollView style={styles.page} scrollEnabled={!isDrawing}>
         <View style={{marginBottom: 10}}>
           <FlatList
             data={item?.data}

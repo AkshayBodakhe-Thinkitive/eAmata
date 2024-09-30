@@ -22,8 +22,8 @@ interface Props {
 const styles = StyleSheet.create({
   btnContainer: {
     padding: '2%',
-    borderTopWidth: 0.5,
-    borderColor: 'lightgrey',
+    // borderTopWidth: 0.5,
+    // borderColor: 'lightgrey',
     elevation: 5,
     shadowOffset: {
       height: -5,

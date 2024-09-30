@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     width: '49%',
     height: null,
     padding: 7,
+    borderColor : '#9AA5A8'
   },
   iconContainer: {
     marginRight: 5,

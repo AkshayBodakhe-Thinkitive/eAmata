@@ -50,10 +50,10 @@ const VitalsChart = ({records, record2}: any) => {
   return (
     <View style={{borderWidth: 0}}>
       <LineChart
-        isAnimated
+        // isAnimated
         data={records}
         data2={record2}
-        spacing={responsiveWidth(22)}
+        spacing={responsiveWidth(20)}
         maxValue={adjustedMaxValue}
         // yAxisOffset={adjustedMinValue} // minValue
         // stepValue={10}

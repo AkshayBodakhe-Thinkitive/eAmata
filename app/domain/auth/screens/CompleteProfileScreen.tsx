@@ -1,4 +1,6 @@
 import {
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -41,7 +43,10 @@ const CompleteProfileScreen = ({navigation}:any) => {
   return (
     <View style={styles.container}>
       <Header title='Complete Your Profile' iconVisible={false}/>
-      <ScrollView style={styles.page}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{flex: 1}}>
+      <ScrollView style={styles.page} scrollEnabled={!isDrawing}>
         <CustomText
           fontFamily={FontType.Roboto_Medium}
           fontSize={responsiveFontSize(2)}>
@@ -134,6 +139,7 @@ const CompleteProfileScreen = ({navigation}:any) => {
 
         <View style={{marginBottom: 50}}></View>
       </ScrollView>
+      </KeyboardAvoidingView>
        <BottomButton title='Next' onPress={handleSubmit}/>
     </View>
   );

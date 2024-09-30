@@ -2,5 +2,6 @@
 
 export interface IAuth {
     isLoggedIn : boolean,
-    loading: boolean
+    loading: boolean,
+    isOnboarded : boolean
 }

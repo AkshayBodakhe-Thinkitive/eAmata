@@ -8,6 +8,8 @@ import ResetPasswordScreen from '../../domain/auth/screens/ResetPasswordScreen';
 import CompleteProfileScreen from '../../domain/auth/screens/CompleteProfileScreen';
 import ConsentFormsList from '../../domain/auth/screens/ConsentFormsList';
 import ConsentFormScreen from '../../domain/auth/screens/ConsentFormScreen';
+import LoginScreen from '../../domain/auth/screens/LoginScreen';
+import ForgotPassScreen from '../../domain/auth/screens/ForgotPassScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +39,14 @@ const AuthNavigator = () => {
          <Stack.Screen
         name={AuthNavConstants.consentformscreen}
         component={ConsentFormScreen}
+      />
+       <Stack.Screen
+        name={AuthNavConstants.login}
+        component={LoginScreen}
+      />
+         <Stack.Screen
+        name={AuthNavConstants.forgotpass}
+        component={ForgotPassScreen}
       />
     </Stack.Navigator>
   );

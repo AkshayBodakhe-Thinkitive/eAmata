@@ -7,6 +7,7 @@ import {FontType} from '../../constants/FontType';
 import {
   responsiveFontSize,
   responsiveHeight,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {OctiIcons} from '../../components/Icons/OctiIcons';
 import HomeScreen from '../../domain/home/screen/HomeScreen';
@@ -14,7 +15,7 @@ import EventsScreen from '../../domain/events/screens/EventsScreen';
 import VitalsScreen from '../../domain/vitals/screens/VitalsScreen';
 import DrawerNavigator from '../DrawerNavigation/DrawerNavigator';
 import MedsScreen from '../../domain/medical-records/screens/MedsScreen';
-
+import QuickAccessModal from '../QuickAcess/QuickAcessModal';
 
 const PlusButton = ({onPress}: any) => {
   return (
@@ -88,10 +89,15 @@ const BottomBar = () => {
 };
 
 const CustomTabBar = (props: any) => {
+  const [showQuickAccess, setShowQuickAccess] = React.useState(false);
+
+  const handleQuickAccess = () => setShowQuickAccess(false);
+
   return (
     <View style={styles.tabBarContainer}>
       <PlusButton
         onPress={() => {
+          setShowQuickAccess(true)
           console.log('Plus Button Pressed!');
         }}
       />
@@ -118,6 +124,7 @@ const CustomTabBar = (props: any) => {
           </TouchableOpacity>
         );
       })}
+      <QuickAccessModal visible={showQuickAccess} onClose={handleQuickAccess} />
     </View>
   );
 };
@@ -133,7 +140,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     position: 'relative',
     shadowOpacity: 0.1,
-    elevation:4
+    elevation: 4,
   },
   tabButton: {
     flex: 1,
@@ -145,7 +152,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: responsiveHeight(3.1),
     left: '55%',
-    transform: [{translateX: -35}],
+    transform: [{translateX: -responsiveWidth(7.5)}],
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 10,
@@ -165,7 +172,6 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    elevation: 5,
   },
 });
 

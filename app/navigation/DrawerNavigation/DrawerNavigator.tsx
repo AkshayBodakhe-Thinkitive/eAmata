@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/drawer';
 import MaterialCommunityIcons from '../../components/Icons/MaterialCommunityIcons';
 import {MaterialIcons} from '../../components/Icons/MaterialIcons';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {CommonActions, DrawerActions, useNavigation} from '@react-navigation/native';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -18,7 +18,7 @@ import {Colors} from '../../constants/ColorConstants';
 import {ImagePath} from '../../constants/ImagePaths';
 import Row from '../../components/Row/Row';
 import {FeatherIcon} from '../../components/Icons/FeatherIcon';
-import {AppNavConstants} from '../../constants/NavConstants';
+import {AppNavConstants, AuthNavConstants} from '../../constants/NavConstants';
 import CarePlanMain from '../../domain/careplan/screens/CarePlanMain';
 import HomeScreen from '../../domain/home/screen/HomeScreen';
 import AllergiesScreen from '../../domain/medical-records/screens/AllergiesScreen';
@@ -26,9 +26,11 @@ import MedicationsMain from '../../domain/medical-records/screens/MedicationsMai
 import AssignedDevices from '../../domain/medical-records/screens/AssignedDevices';
 import ConsentsScreen from '../../domain/medical-records/screens/ConsentsScreen';
 import Resources from '../../domain/medical-records/screens/Resources';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { RootState } from '../../store/storeConfig';
 import ConsentFormScreen from '../../domain/auth/screens/ConsentFormScreen';
+import LogoutModal from '../../domain/auth/components/LogoutModal/LogoutModal';
+import { login } from '../../domain/auth/store/AuthReducer';
 
 const Drawer = createDrawerNavigator();
 
@@ -75,38 +77,46 @@ const DrawerNavigator = () => {
       icon: <ImageIcon imagePath={ImagePath.clinical_notes} />,
       onPress: () => navigation.navigate(AppNavConstants.CARE_PLAN),
     },
-    {
-      label: 'Assigned Devices',
-      icon: <ImageIcon imagePath={ImagePath.browse_activity} />,
-      onPress: () => navigation.navigate(AppNavConstants.ASSIGNED_DEVICES),
-    },
+    // {
+    //   label: 'Assigned Devices',
+    //   icon: <ImageIcon imagePath={ImagePath.browse_activity} />,
+    //   onPress: () => navigation.navigate(AppNavConstants.ASSIGNED_DEVICES),
+    // },
     {
       label: 'Consents',
       icon: <ImageIcon imagePath={ImagePath.handshake} />,
       onPress: () => navigation.navigate(AppNavConstants.CONSENTS),
     },
-    {
-      label: 'Resources',
-      icon: (
-        <MaterialCommunityIcons
-          name="text-box-outline"
-          size={21}
-          color={Colors.primary80}
-        />
-      ),
-      onPress: () => navigation.navigate(AppNavConstants.RESOURCES),
-    },
+    // {
+    //   label: 'Resources',
+    //   icon: (
+    //     <MaterialCommunityIcons
+    //       name="text-box-outline"
+    //       size={21}
+    //       color={Colors.primary80}
+    //     />
+    //   ),
+    //   onPress: () => navigation.navigate(AppNavConstants.RESOURCES),
+    // },
   ];
 
   const navigation = useNavigation<any>();
 
-  const logoutFun = () => {
-    navigation.navigate('Auth');
-    setShowLogoutModal(false);
-  };
+  const dispatch = useAppDispatch()
+
 
   const closeDrawer = () => {
     navigation.dispatch(DrawerActions.closeDrawer());
+  };
+
+
+  const logoutFun = async () => {
+    await dispatch(login(false))
+    navigation.navigate(AppNavConstants.AUTH, {
+      screen: AuthNavConstants.login,
+    });
+    closeDrawer()
+    setShowLogoutModal(false);
   };
 
   const CustomDrawerContent = (props: any) => {
@@ -143,7 +153,7 @@ const DrawerNavigator = () => {
         ))}
 
         <View style={styles.drawerItemContainer} />
-        <View style={{borderWidth: 0, marginTop: '110%'}}>
+        <View style={{borderWidth: 0, marginTop: '150%'}}>
           <CustomDrawerItem
             label="Log Out"
             icon={
@@ -155,11 +165,11 @@ const DrawerNavigator = () => {
             }
             onPress={() => setShowLogoutModal(!showLogoutModal)}
           />
-          {/* <LogoutModal
+          <LogoutModal
             show={showLogoutModal}
             setShow={setShowLogoutModal}
             onLogout={logoutFun}
-          /> */}
+          />
         </View>
       </DrawerContentScrollView>
     );

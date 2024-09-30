@@ -13,8 +13,12 @@ import {AntIcons} from '../../../components/Icons/AntIcons';
 import BottomButton from '../components/BottomButton/BottomButton';
 import {AuthNavConstants} from '../../../constants/NavConstants';
 import { ConsentFormsList } from '../constants/StringConstants';
+import { useAppDispatch } from '../../../store/hooks';
+import { makeOnboard } from '../store/AuthReducer';
 
 const ConsentFormsLists = ({navigation}: any) => {
+
+  const dispatch = useAppDispatch()
 
   const navigateToConsent = (item: any) => {
     navigation.navigate(AuthNavConstants.consentformscreen, {item: item,showBtn:true});
@@ -48,8 +52,9 @@ const ConsentFormsLists = ({navigation}: any) => {
 
   const renderSeparator = () => <View style={styles.separator} />;
 
-  const handleSubmit = () => {
-    navigation.navigate('Main');
+  const handleSubmit = async () => {
+    await dispatch(makeOnboard(true))
+    navigation.replace('Main');
   };
 
   return (

@@ -40,17 +40,19 @@ const VitalsScreen = () => {
   const [toggleGraph, setToggleGraph] = useState(0);
 
   const data = [
-    {value: 40, label: '11 AM'},
-    {value: 80, label: '1 PM'},
-    {value: 50, label: '2 AM'},
-    {value: 100, label: '3 AM'},
+    {value: 30, label: '11 AM'},
+    {value: 35, label: '1 PM'},
+    {value: 20, label: '2 AM'},
+    {value: 40, label: '3 AM'},
+    {value: 30, label: '4 AM'},
   ];
 
   const data2 = [
-    {value: 70},
-    {value: 70},
-    {value: 80},
-    {value: 70},
+    {value: 20},
+    {value: 30},
+    {value: 25},
+    {value: 30},
+    {value: 40},
   ];
 
   return (

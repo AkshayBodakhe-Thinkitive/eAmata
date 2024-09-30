@@ -6,35 +6,69 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import Loader from '../../../components/Loader/Loader';
+import {useAppDispatch, useAppSelector} from '../../../store/hooks';
+import {RootState} from '../../../store/storeConfig';
+import {
+  AppNavConstants,
+  AuthNavConstants,
+} from '../../../constants/NavConstants';
+import {login, makeOnboard} from '../store/AuthReducer';
 
 const SplashScreen = ({navigation}: any) => {
   const [loading, setLoading] = useState(false);
 
+  const dispatch = useAppDispatch();
+
+  const isLoggedIn = useAppSelector(
+    (state: RootState) => state.auth.isLoggedIn,
+  );
+
+  const isOnboarded = useAppSelector(
+    (state: RootState) => state.auth.isOnboarded,
+  );
+
+  // console.log(isLoggedIn, isOnboarded);
+
   useEffect(() => {
-    // Start loading after 1 second
+    dispatch(makeOnboard(false));
+    dispatch(login(false));
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(true); // Start showing loader
+      setLoading(true);
       const navigationTimer = setTimeout(() => {
-        setLoading(false); // Stop loader after 1 second
-        navigation.navigate('Auth'); // Navigate to Auth screen
-      }, 2000); // Duration for displaying loader
+        setLoading(false);
 
-      return () => clearTimeout(navigationTimer); // Cleanup navigation timer on unmount
-    }, 1000); // Initial delay before starting loader
+        if (isLoggedIn && isOnboarded) {
+          navigation.navigate(AppNavConstants.MAIN);
+        } else if (isOnboarded === false) {
+          navigation.navigate(AppNavConstants.AUTH, {
+            screen: AuthNavConstants.welcome,
+          });
+        } else if (isLoggedIn === false) {
+          navigation.navigate(AppNavConstants.AUTH, {
+            screen: AuthNavConstants.login,
+          });
+        }
 
-    return () => clearTimeout(timer); // Cleanup initial timer on unmount
+        // navigation.navigate(AppNavConstants.MAIN);
+      }, 2000);
+
+      return () => clearTimeout(navigationTimer);
+    }, 1000);
+    return () => clearTimeout(timer);
   }, [navigation]);
 
   return (
-      <ImageBackground source={ImagePath.splashscreen} style={{flex:1,alignItems:'center'}}>
-        <View style={styles.innerContainer}>
-          <Image
-            source={ImagePath.splashscreenlogo}
-            style={styles.logoStyles}
-          />
-          {loading && <Loader />}
-        </View>
-      </ImageBackground>
+    <ImageBackground
+      source={ImagePath.splashscreen}
+      style={{flex: 1, alignItems: 'center'}}>
+      <View style={styles.innerContainer}>
+        <Image source={ImagePath.splashscreenlogo} style={styles.logoStyles} />
+        {loading && <Loader />}
+      </View>
+    </ImageBackground>
   );
 };
 

@@ -64,7 +64,6 @@ const TextInput = forwardRef(
               borderWidth: 0.5,
               marginBottom: 0,
             },
-            // editable === false && {backgroundColor : colors.grey2E},
             inputBoxStyles,
           ]}>
           <RnTextInput
@@ -75,11 +74,12 @@ const TextInput = forwardRef(
               leftIcon ? {marginLeft: responsiveWidth(8)} : null,
             ]}
             editable={editable}
-            value={showPass && secureTextEntry ? displayValue : internalValue}
+            // value={showPass && secureTextEntry ? displayValue : internalValue}
+            value={value}
             placeholder={placeholder}
             placeholderTextColor={Colors.neutral40}
             onChangeText={onChangeTxt}
-            // secureTextEntry={secureTextEntry ? showPass : false}
+            secureTextEntry={secureTextEntry ? showPass : false}
             keyboardType={keyboardType}
             onBlur={onBlur}
             onFocus={onFocus}

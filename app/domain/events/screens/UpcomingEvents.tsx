@@ -32,6 +32,7 @@ const UpcomingEvents = () => {
         startDate={item.startDate}
         status={item.status}
         showDate={showDate}
+        eventType={item?.eventType}
       />
     );
   };
