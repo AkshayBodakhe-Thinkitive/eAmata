@@ -21,7 +21,9 @@ import {FeatherIcon} from '../../../components/Icons/FeatherIcon';
 import Header from '../../../components/Header/Header';
 import Row from '../../../components/Row/Row';
 import {OctiIcons} from '../../../components/Icons/OctiIcons';
-import { ImagePath } from '../../../constants/ImagePaths';
+import {ImagePath} from '../../../constants/ImagePaths';
+import Card from '../../../components/Card/Card';
+import BottomButton from '../../auth/components/BottomButton/BottomButton';
 
 const VirtualEventStart = () => {
   const handleStartPress = () => {
@@ -68,13 +70,19 @@ const VirtualEventStart = () => {
         </View>
 
         {/* Guests Section */}
-        <View style={styles.guestsContainer}>
+        <Card style={styles.guestsContainer}>
           <TouchableOpacity style={styles.guestHeader} activeOpacity={0.7}>
-          <Row>
-          {/* <MaterialIcons name="group" size={24} color={Colors.neutral70} /> */}
-           <Image source={ImagePath.group} style={{resizeMode:'contain',height:responsiveHeight(3),width:responsiveWidth(6)}}/>
-            <Text style={styles.guestText}>2 guests</Text>
-          </Row>
+            <Row>
+              <Image
+                source={ImagePath.group}
+                style={{
+                  resizeMode: 'contain',
+                  height: responsiveHeight(3),
+                  width: responsiveWidth(6),
+                }}
+              />
+              <Text style={styles.guestText}>2 guests</Text>
+            </Row>
             <FeatherIcon
               name="chevron-down"
               size={24}
@@ -86,7 +94,9 @@ const VirtualEventStart = () => {
           <View style={styles.guestList}>
             <View style={styles.guestItem}>
               <Image
-                source={{uri: 'https://placekitten.com/100/100'}}
+                source={{
+                  uri: `https://img.freepik.com/free-photo/portrait-medical-worker-female-physician-face-mask-from-covid-pandemic-smiling-look_1258-85659.jpg?t=st=1727133495~exp=1727137095~hmac=93d48ef85878587a67a46208af9f2fca658fef388b014a96919cda2c72e8b212`,
+                }}
                 style={styles.guestImage}
               />
               <View>
@@ -96,7 +106,9 @@ const VirtualEventStart = () => {
             </View>
             <View style={styles.guestItem}>
               <Image
-                source={{uri: 'https://placekitten.com/101/101'}}
+                source={{
+                  uri: `https://img.freepik.com/free-photo/portrait-health-worker-special-equipment_23-2148980742.jpg`,
+                }}
                 style={styles.guestImage}
               />
               <View>
@@ -105,7 +117,7 @@ const VirtualEventStart = () => {
               </View>
             </View>
           </View>
-        </View>
+        </Card>
 
         {/* Description */}
         <View style={styles.descriptionContainer}>
@@ -118,16 +130,11 @@ const VirtualEventStart = () => {
           </Text>
         </View>
       </ScrollView>
-
-      {/* Start Button */}
-      <TouchableOpacity style={styles.startButton} onPress={handleStartPress}>
-        <Text style={styles.startButtonText}>Start</Text>
-      </TouchableOpacity>
+      <BottomButton title='Start'  onPress={handleStartPress}/>
     </View>
   );
 };
 
-// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -161,15 +168,22 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   guestsContainer: {
-    backgroundColor: Colors.neutral10,
-    padding: responsiveHeight(2),
+    backgroundColor: Colors.neutral1,
+    padding: responsiveHeight(1.5),
     borderRadius: 10,
+    width: '100%',
+    height: null,
+    borderWidth: 1,
+    borderColor: Colors.neutral5,
     marginBottom: responsiveHeight(3),
   },
   guestHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: Colors.neutral5,
+    paddingBottom:responsiveHeight(1.5)
   },
   guestText: {
     fontFamily: FontType.Roboto_Medium,
@@ -186,15 +200,17 @@ const styles = StyleSheet.create({
     marginBottom: responsiveHeight(1.5),
   },
   guestImage: {
-    width: responsiveHeight(6),
-    height: responsiveHeight(6),
-    borderRadius: responsiveHeight(3),
+    width: responsiveHeight(5),
+    height: responsiveHeight(5),
+    borderRadius: responsiveHeight(2.5),
     marginRight: responsiveWidth(3),
+    marginBottom:5
   },
   guestName: {
     fontFamily: FontType.Roboto_Medium,
     fontSize: responsiveFontSize(2),
     color: Colors.neutral80,
+    marginBottom:5
   },
   guestRole: {
     fontFamily: FontType.Roboto_Regular,
