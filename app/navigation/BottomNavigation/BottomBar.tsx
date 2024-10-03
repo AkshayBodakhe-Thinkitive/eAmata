@@ -21,7 +21,12 @@ const PlusButton = ({onPress}: any) => {
   return (
     <TouchableOpacity style={styles.plusButton} onPress={onPress}>
       <View style={styles.plusButtonInner}>
-        <OctiIcons name="plus" size={30} color="white" />
+        <OctiIcons
+          name="plus"
+          size={responsiveFontSize(4.2)}
+          color="white"
+          style={{marginTop: '3%'}}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -97,7 +102,7 @@ const CustomTabBar = (props: any) => {
     <View style={styles.tabBarContainer}>
       <PlusButton
         onPress={() => {
-          setShowQuickAccess(true)
+          setShowQuickAccess(true);
           console.log('Plus Button Pressed!');
         }}
       />
@@ -107,7 +112,10 @@ const CustomTabBar = (props: any) => {
           <TouchableOpacity
             key={index}
             onPress={() => props.navigation.navigate(route.name)}
-            style={styles.tabButton}>
+            style={[
+              styles.tabButton,
+              isFocused && {backgroundColor: Colors.primary5},
+            ]}>
             {props.descriptors[route.key].options.tabBarIcon({
               focused: isFocused,
               color: isFocused ? Colors.primary : Colors.neutral60,
@@ -137,26 +145,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: Platform.OS === 'ios' ? responsiveHeight(10) : responsiveHeight(9),
     backgroundColor: 'white',
-    paddingHorizontal: 20,
+    paddingHorizontal: responsiveWidth(1),
     position: 'relative',
     shadowOpacity: 0.1,
     elevation: 4,
+    // borderWidth:1
   },
   tabButton: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    top: Platform.OS === 'ios' ? '-2%' : 0,
+    top: Platform.OS === 'ios' ? '-2.5%' : 0,
+    // borderWidth:1,
+    borderRadius: responsiveHeight(4),
+    // backgroundColor : Colors.primary5,
+    marginHorizontal: 5,
+    padding:  responsiveHeight(0.2),
+    paddingBottom: responsiveHeight(0.8),
   },
   plusButton: {
     position: 'absolute',
     bottom: responsiveHeight(3.1),
-    left: '55%',
-    transform: [{translateX: -responsiveWidth(7.5)}],
+    left: '42%',
+    // transform: [{translateX: -responsiveWidth(8)}],
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 10,
-    // borderWidth : 1,
     borderRadius: responsiveFontSize(5),
     padding: 5,
     backgroundColor: Colors.primary5,

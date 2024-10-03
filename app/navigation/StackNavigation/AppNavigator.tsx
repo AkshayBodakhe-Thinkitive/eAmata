@@ -16,13 +16,11 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName={AppNavConstants.SPLASHSCREEN}
-        // initialRouteName={AppNavConstants.MAIN}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name={AppNavConstants.SPLASHSCREEN} component={SplashScreen} />
         <Stack.Screen name={'apphome'} component={HomeScreen} />
         <Stack.Screen name={AppNavConstants.AUTH} component={AuthNavigator} />
         <Stack.Screen name={AppNavConstants.MAIN} component={BottomBar} />
-
         <Stack.Screen name={AppNavConstants.VIRTUAL_EVENT_START} component={VirtualEventStart} />
       </Stack.Navigator>
     </NavigationContainer>

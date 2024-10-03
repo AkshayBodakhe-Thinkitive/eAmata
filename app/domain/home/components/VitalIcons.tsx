@@ -4,12 +4,12 @@ import { Colors } from '../../../constants/ColorConstants';
 import { ImagePath } from '../../../constants/ImagePaths';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
-const useVitalIcon = (vitalName: string) => {
+const useVitalIcon = (vitalName: string,isFocused: boolean) => {
   switch (vitalName) {
     case 'Heart Rate':
       return (
         <Image
-          source={ImagePath.cardiology}
+          source={isFocused ? ImagePath.cardiology_focused : ImagePath.cardiology}
           style={styles.iconStyles}
           resizeMode="contain"
         />
@@ -17,7 +17,7 @@ const useVitalIcon = (vitalName: string) => {
     case 'Weight':
       return (
         <Image
-          source={ImagePath.weight}
+          source={isFocused ? ImagePath.weight_focused : ImagePath.weight}
           style={styles.iconStyles}
           resizeMode="contain"
         />
@@ -25,7 +25,7 @@ const useVitalIcon = (vitalName: string) => {
     case 'Blood Pressure':  
       return (
         <Image
-          source={ImagePath.water_drop}
+          source={isFocused ? ImagePath.drop_focused : ImagePath.water_drop}
           style={styles.iconStyles}
           resizeMode="contain"
         />
@@ -33,7 +33,7 @@ const useVitalIcon = (vitalName: string) => {
       case 'Blood Glucose':
       return (
         <Image
-          source={ImagePath.glucose}
+          source={isFocused ? ImagePath.glucose_focused : ImagePath.glucose}
           style={styles.iconStyles}
           resizeMode="contain"
         />

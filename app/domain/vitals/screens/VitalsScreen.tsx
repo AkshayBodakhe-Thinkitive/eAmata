@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Colors} from '../../../constants/ColorConstants';
 import CommonHeader from '../../../components/Header/CommonHeader';
 import {staticVitalsData} from '../../home/constants/StringConstants';
@@ -16,9 +16,21 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Ionicons} from '../../../components/Icons/Ionicons';
 import {AntIcons} from '../../../components/Icons/AntIcons';
 import VitalsChart from '../components/vitalchart/VitalsChart';
+import {useRoute} from '@react-navigation/native';
+import Card from '../../../components/Card/Card';
+import {FontType} from '../../../constants/FontType';
+import Status from '../../../components/Status/Status';
+import {FontAwesome} from '../../../components/Icons/FontAwesome';
+import {FeatherIcon} from '../../../components/Icons/FeatherIcon';
 
 const VitalsScreen = () => {
-  const pastDropdownData = [{label: 'Past 24 Hour', value: '24hr'}];
+  const route = useRoute<any>();
+
+  const pastDropdownData = [
+    {label: 'Past 24 Hour', value: '24hr'},
+    {label: 'Last Week', value: 'last week'},
+    {label: 'Last Month', value: 'last month'},
+  ];
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -39,21 +51,17 @@ const VitalsScreen = () => {
 
   const [toggleGraph, setToggleGraph] = useState(0);
 
-  const data = [
-    {value: 30, label: '11 AM'},
-    {value: 35, label: '1 PM'},
-    {value: 20, label: '2 AM'},
-    {value: 40, label: '3 AM'},
-    {value: 30, label: '4 AM'},
-  ];
+  const {selectedVital} = route?.params ?? {};
 
-  const data2 = [
-    {value: 20},
-    {value: 30},
-    {value: 25},
-    {value: 30},
-    {value: 40},
-  ];
+  const [focusedVital, setFocusedVital] = useState<any>();
+
+  useEffect(() => {
+    selectedVital
+      ? setFocusedVital(selectedVital)
+      : setFocusedVital(staticVitalsData[0]);
+  }, [selectedVital]);
+
+  // console.log("selectedVital ==>",focusedVital)
 
   return (
     <View style={styles.container}>
@@ -70,7 +78,13 @@ const VitalsScreen = () => {
             }}
             contentContainerStyle={{marginBottom: responsiveHeight(1.2)}}
             renderItem={({item}) => {
-              return <VitalCard item={item} />;
+              return (
+                <VitalCard
+                  item={item}
+                  selected={focusedVital?.name === item.name} // Pass whether this card should be focused
+                  onPress={() => setFocusedVital(item)} // Update focusedVital state when pressed
+                />
+              );
             }}
           />
         </View>
@@ -133,15 +147,73 @@ const VitalsScreen = () => {
           </Row>
         </Row>
 
-        {toggleGraph === 0 ? (
+        {toggleGraph === 0 && focusedVital ? (
           <View style={{flex: 1, borderWidth: 0}}>
-            <VitalsChart records={data} record2={data2} />
+            <VitalsChart
+              records={focusedVital?.data}
+              record2={focusedVital?.data2}
+              referenceRange={focusedVital?.referenceRange}
+            />
           </View>
         ) : (
           <View style={{flex: 1, borderWidth: 0}}>
-             
+            <FlatList
+              data={focusedVital?.data}
+              renderItem={({item, index}: any) => {
+                let up = index % 2 === 0;
+
+                return (
+                  <Card style={styles.card}>
+                    <Row style={styles.rowHeader}>
+                      <Text style={styles.vitalName}>{focusedVital?.name}</Text>
+                      <Status status={up ? 'Device' : 'EHR'} />
+                    </Row>
+                    <Row style={{justifyContent: 'space-between'}}>
+                      <Row style={{width: '40%'}}>
+                        <Row style={styles.valueContainer}>
+                          <Text style={styles.valueText}>{item?.value}</Text>
+                          <Ionicons
+                            name={up ? 'arrow-up' : 'arrow-down'}
+                            size={responsiveFontSize(2.5)}
+                            color={up ? Colors.red : Colors.green}
+                          />
+                        </Row>
+                        <Row style={styles.valueContainer}>
+                          <Text style={styles.valueText}>
+                            {focusedVital?.data2?.[index]?.value}
+                          </Text>
+                          {focusedVital?.data2?.[index]?.value && (
+                            <Ionicons
+                              name={up ? 'arrow-up' : 'arrow-down'}
+                              size={responsiveFontSize(2.5)}
+                              color={up ? Colors.red : Colors.green}
+                            />
+                          )}
+                        </Row>
+                      </Row>
+                      <Text style={styles.date}>02-04-2022, 12:30 PM</Text>
+                    </Row>
+                  </Card>
+                );
+              }}
+            />
           </View>
         )}
+      {toggleGraph === 0 && <Row
+          style={{
+            borderWidth: 0,
+            justifyContent: 'center',
+            marginBottom: '4%',
+          }}>
+          <Row style={{marginRight: '3%'}}>
+            <Text style={styles.unitText}>
+              {focusedVital?.unit1 ? focusedVital?.unit1 : focusedVital?.unit}
+            </Text>
+          </Row>
+          <Row>
+          <Text style={styles.unitText}>{focusedVital?.unit2}</Text>
+          </Row>
+        </Row>}
       </View>
     </View>
   );
@@ -182,4 +254,39 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   selectedToggle: {},
+  card: {
+    padding: responsiveHeight(1),
+    width: '100%',
+    height: null,
+    marginBottom: responsiveHeight(1),
+  },
+  rowHeader: {
+    marginBottom: 5,
+    justifyContent: 'space-between',
+  },
+  vitalName: {
+    color: Colors.neutral60,
+    fontFamily: FontType.Roboto_Medium,
+    fontSize: responsiveFontSize(1.8),
+  },
+  valueContainer: {
+    // width: '15%',
+    justifyContent: 'space-between',
+    marginRight: 10,
+  },
+  valueText: {
+    color: Colors.neutral70,
+    fontFamily: FontType.Roboto_Medium,
+    fontSize: responsiveFontSize(1.8),
+  },
+  date: {
+    color: Colors.neutral60,
+    fontFamily: FontType.Roboto_Regular,
+    fontSize: responsiveFontSize(1.8),
+  },
+  unitText: {
+    fontFamily: FontType.Roboto_Medium,
+    fontSize: responsiveFontSize(2),
+    color: Colors.neutral80,
+  },
 });

@@ -14,31 +14,29 @@ import {MaterialIcons} from '../Icons/MaterialIcons';
 import {
   responsiveFontSize,
   responsiveHeight,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {ImagePath} from '../../constants/ImagePaths';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import {Colors} from '../../constants/ColorConstants';
 import {FontType} from '../../constants/FontType';
-import { useAppDispatch } from '../../store/hooks';
-import { openDrawer } from '../../navigation/NavigationReducer';
+import {useAppDispatch} from '../../store/hooks';
+import {openDrawer} from '../../navigation/NavigationReducer';
 
 interface Props {
   title?: any;
-  hideprofileIcon? : boolean
+  hideprofileIcon?: boolean;
 }
 
-const CommonHeader = ({title,hideprofileIcon}: Props) => {
-
+const CommonHeader = ({title, hideprofileIcon}: Props) => {
   const navigation = useNavigation<any>();
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const openDrawerFun = () => {
     navigation.dispatch(DrawerActions.openDrawer());
     // dispatch(openDrawer())
   };
-
-
 
   const notificationCount = 3;
   return (
@@ -53,7 +51,7 @@ const CommonHeader = ({title,hideprofileIcon}: Props) => {
           ) : (
             <View>
               <Text style={styles.greetingTxt}>Good Morning!</Text>
-              <Text style={styles.nameTxt}>Akshay Bodakhe</Text>
+              <Text style={styles.nameTxt}>Peter Parker</Text>
             </View>
           )}
         </Row>
@@ -66,10 +64,16 @@ const CommonHeader = ({title,hideprofileIcon}: Props) => {
               </View>
             )}
           </TouchableOpacity>
-         {!hideprofileIcon && <Image
-            source={ImagePath.avatar}
-            style={{resizeMode: 'contain', height: responsiveHeight(3.5)}}
-          />}
+          {!hideprofileIcon && (
+            <TouchableOpacity>
+              <Image
+                source={{
+                  uri: 'https://media.istockphoto.com/id/1335941248/photo/shot-of-a-handsome-young-man-standing-against-a-grey-background.webp?b=1&s=612x612&w=0&k=20&c=07SAQPb33q39bTswXx3DsQWU0Mwnuvs2GxigTlLo9Lg=',
+                }}
+                style={styles.profileImageIcon}
+              />
+            </TouchableOpacity>
+          )}
         </Row>
       </Row>
     </Header>
@@ -126,5 +130,13 @@ const styles = StyleSheet.create({
   bellIcon: {
     fontSize: responsiveFontSize(3.3),
     color: Colors.neutral90,
+  },
+  profileImageIcon: {
+    resizeMode: 'cover',
+    height: responsiveHeight(3.5),
+    // borderWidth: 1,
+    borderRadius: responsiveHeight(5),
+    width: responsiveWidth(8),
+    marginLeft: responsiveWidth(5),
   },
 });

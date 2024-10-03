@@ -2,6 +2,8 @@
 export const Colors = {
     black : 'black',
     white : 'white',
+    red : 'red',
+    green : 'green',
 
     primary : '#006D8F',
     primary1 : '#EEFBFF',

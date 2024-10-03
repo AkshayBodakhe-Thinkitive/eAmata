@@ -54,8 +54,8 @@ const LoginScreen = ({navigation}: any) => {
   };
 
   const handleForgotPass = () => {
-    navigation.navigate(AuthNavConstants.forgotpass)
-  }
+    navigation.navigate(AuthNavConstants.forgotpass);
+  };
 
   const handleSubmit = () => {
     dispatch(login(true));
@@ -97,7 +97,7 @@ const LoginScreen = ({navigation}: any) => {
         />
         <TextInput
           value={password}
-          placeholder="Enter Your Email"
+          placeholder="Enter Your Password"
           secureTextEntry
           autoCapitalize="none"
           label="Password"

@@ -68,7 +68,6 @@ const WelcomeScreen = ({navigation}:any) => {
         />
       </View>
       <BottomButton 
-      // disabled={email === ''} 
       title="Continue" 
       onPress={handleSubmit} />
     </SafeAreaView>

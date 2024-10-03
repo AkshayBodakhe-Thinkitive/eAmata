@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   focusedStyles: {
-    backgroundColor: Colors.primary5,
+    // backgroundColor: Colors.primary5,
     borderRadius: 18,
     paddingVertical: 6,
   },

@@ -10,7 +10,7 @@ import CustomText from '../../../../components/Text/CustomText';
 import {FontType} from '../../../../constants/FontType';
 import { Colors } from '../../../../constants/ColorConstants';
 
-const VitalsChart = ({records, record2}: any) => {
+const VitalsChart = ({records, record2,referenceRange}: any) => {
   const getMaxValue = (data: any): number => {
     const max = Math.max(...data.map((item: any) => item.value));
     const step = parseFloat((max / 4).toFixed(2));
@@ -53,12 +53,12 @@ const VitalsChart = ({records, record2}: any) => {
         // isAnimated
         data={records}
         data2={record2}
-        spacing={responsiveWidth(20)}
+        spacing={responsiveWidth(15)}
         maxValue={adjustedMaxValue}
         // yAxisOffset={adjustedMinValue} // minValue
         // stepValue={10}
-        // showVerticalLines={true}
-        stepHeight={35}
+
+        stepHeight={responsiveHeight(3.6)}
         animationDuration={2000}
         xAxisColor={'#ACACAC'}
         xAxisLabelsHeight={70}
@@ -67,8 +67,6 @@ const VitalsChart = ({records, record2}: any) => {
           color: '#ACACAC',
           fontFamily: FontType.Roboto_Regular,
           fontSize: responsiveFontSize(1.5),
-          // borderWidth:1,
-          // transform: [{rotate: '-30deg'}],
           top: '90%',
         }}
         dataPointsHeight={0}
@@ -83,9 +81,9 @@ const VitalsChart = ({records, record2}: any) => {
         dataPointsRadius={4}
         customDataPoint={customDataPoint}
         dataPointsColor={Colors.primary}
-        color={Colors.primary}
+        color={'#3295D2'}
+        // color2='#E257FF'
         areaChart
-        // curved
         showDataPointOnFocus
         initialSpacing={25}
         endSpacing={0}
@@ -127,6 +125,12 @@ const VitalsChart = ({records, record2}: any) => {
             );
           },
         }}
+        // showReferenceLine1
+        // referenceLine1Position={referenceRange?.min} // Set to minimum value of the range
+        // referenceLine1Config={{ color: 'red', dashWidth: 2, dashGap: 4, type: 'dashed' }}
+        // showReferenceLine2
+        // referenceLine2Position={referenceRange?.max} // Set to maximum value of the range
+        // referenceLine2Config={{ color: 'red', dashWidth: 2, dashGap: 4, type: 'dashed' }}
       />
     </View>
   );
@@ -134,4 +138,3 @@ const VitalsChart = ({records, record2}: any) => {
 
 export default VitalsChart;
 
-const styles = StyleSheet.create({});
