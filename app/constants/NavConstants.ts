@@ -13,7 +13,7 @@ export const AppNavConstants = {
   SPLASHSCREEN: 'splashscreen',
   AUTH: 'Auth',
   MAIN: 'Main',
-
+  
   CARE_PLAN: 'careplan',
   ALLERGIES: 'allergies',
   MEDICATIONS: 'medications',
@@ -22,6 +22,8 @@ export const AppNavConstants = {
   RESOURCES: 'resources',
 
   VIRTUAL_EVENT_START: 'virtualeventstart',
+  EVENT_DETAIL : 'EventDetailScreen',
+  REQUEST_ASSISTANCE : 'RequestAssistanceScreen'
 };
 
 export const BottomNavConstants = {

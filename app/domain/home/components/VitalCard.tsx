@@ -2,6 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, { useState } from 'react';
 import {
   responsiveFontSize,
+  responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import Card from '../../../components/Card/Card';
@@ -70,9 +71,10 @@ export default VitalCard;
 const styles = StyleSheet.create({
   vitalCard: {
     width: '100%',
-    height: null,
-    padding: 7,
+    height:null,
+    paddingHorizontal: responsiveFontSize(0.8),
     borderColor: '#9AA5A8',
+    backgroundColor: '#FBFCFD'
   },
   iconContainer: {
     marginRight: 5,

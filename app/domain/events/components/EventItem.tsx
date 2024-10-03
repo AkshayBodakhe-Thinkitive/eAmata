@@ -44,6 +44,9 @@ const EventItem = ({
     if (eventType === 'virtual') {
       navigation.navigate(AppNavConstants.VIRTUAL_EVENT_START);
     }
+    if (eventType === 'normal') {
+      navigation.navigate(AppNavConstants.EVENT_DETAIL);
+    }
   };
 
   return (

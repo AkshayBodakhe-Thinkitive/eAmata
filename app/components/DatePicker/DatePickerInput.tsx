@@ -13,6 +13,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {
   responsiveFontSize,
   responsiveHeight,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {FontType} from '../../constants/FontType';
 import {formatDate} from '../../utils/DateUtils';
@@ -108,13 +109,13 @@ const DatePickerInput = ({
         ]}>
         <View
           style={{
-            width: '20%',
+            width: responsiveWidth(8),
             height: '100%',
             alignItems: 'center',
           }}>
           <MaterialCommunityIcons
             name={mode === 'time' ? 'clock-outline' : 'calendar-month-outline'}
-            size={24}
+            size={responsiveFontSize(3.5)}
             color={Colors.neutral40}
             style={{top: '20%'}}
           />
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: responsiveHeight(5.5),
-    paddingHorizontal: 10,
+    paddingHorizontal: responsiveWidth(1.6),
     fontFamily: FontType.Roboto_Medium,
     fontSize: responsiveFontSize(1.8),
     color: '#565656',

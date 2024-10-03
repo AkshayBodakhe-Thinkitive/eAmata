@@ -34,9 +34,9 @@ export const DropdownStyles = StyleSheet.create({
     color : Colors.neutral40
   },
   selectedTextStyle: {
-    fontSize: responsiveFontSize(1.7),
-    fontFamily: FontType.Roboto_Medium,
-    color : Colors.black
+    fontSize: responsiveFontSize(1.9),
+    fontFamily: FontType.Roboto_Regular,
+    color : Colors.neutral80
   },
   iconStyle: {
     width: 20,

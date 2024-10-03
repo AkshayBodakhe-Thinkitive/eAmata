@@ -27,6 +27,7 @@ export const ImagePath = {
     pill : require('../assets/images/pill.png'),    
     deviceimage : require('../assets/images/deviceimage.png'),  
     group :  require('../assets/images/group.png'),  
-    cardiology_focused :   require('../assets/images/cardiology_focused.png'),  
+    cardiology_focused :   require('../assets/images/cardiology_focused.png'), 
+    support_agent :   require('../assets/images/support_agent.png'), 
 }
 

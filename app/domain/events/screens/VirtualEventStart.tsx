@@ -30,10 +30,6 @@ const VirtualEventStart = () => {
     // Handle Start button press
   };
 
-  const openLink = () => {
-    Linking.openURL('https://sample.zoom.meet/session');
-  };
-
   return (
     <View style={styles.container}>
       <Header></Header>
@@ -62,7 +58,7 @@ const VirtualEventStart = () => {
               Televisit
             </Text>
           </Row>
-          <TouchableOpacity onPress={openLink}>
+          <TouchableOpacity>
             <Text style={styles.linkText}>
               https://sample.zoom.meet/session
             </Text>

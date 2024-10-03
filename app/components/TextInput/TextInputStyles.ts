@@ -24,7 +24,7 @@ export const TextInputStyles = StyleSheet.create({
     },
     labelStyles: {
         color: Colors.neutral70,
-        marginBottom: 10,
+        marginBottom: 6,
         fontFamily : FontType.Roboto_Medium,
         fontSize: responsiveFontSize(1.6)
     },
